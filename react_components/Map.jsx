@@ -1,0 +1,4 @@
+
+var Map = React.createClass({
+
+});
