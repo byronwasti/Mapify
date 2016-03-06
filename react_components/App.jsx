@@ -13,7 +13,10 @@ var App = React.createClass({
 
 	render: function(){
 		return (
-			<h1>Hello world!</h1>
+			<div className="App">
+				<h1>Hello world!</h1>
+				<LoginBox/>
+			</div>
 		)
 	}
 });
