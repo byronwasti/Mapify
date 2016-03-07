@@ -1,3 +1,6 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 var Map = require('./Map.jsx')
 var LoginBox = require('./LoginBox.jsx')
 var Navbar = require('./Navbar.jsx')
@@ -22,6 +25,6 @@ var App = React.createClass({
 });
 
 ReactDOM.render(
-	<App/>,
+	<App url='/'/>,
 	document.getElementById('content')
 );

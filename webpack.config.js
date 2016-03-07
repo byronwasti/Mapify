@@ -1,26 +1,25 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
-    entry: path.join(__dirname, "/public/Main.js"),
+    entry: path.join(__dirname, '/react_components/App.jsx'),
     output: {
-        path: __dirname,
-        filename: path.join("/dist/bundle.js")
+        path: path.join(__dirname, '/public/'),
+        filename: 'bundle.js'
     },
     module: {
-        loaders: [{ 
-            test: /\.css$/, 
-            loader: "style!css" 
-        },{
-            test: /\.scss$/,
-            loaders: ["style", "css", "sass"]
-        },{
-            test: /\.js?$/,
-            exclude: '/node/modules/',
-            loader: 'babel',
-            query: {
-                "presets": ["react" ]//, "es2015", "stage-0", "react-hmre"]
-            }
-        }
-        ]
+        loaders: [{
+                //tell webpack to use jsx-loader for all *.jsx files
+                test: [/\.js$/,/\.jsx$/],
+                exclude: '/node_modules/',
+                loader: 'babel-loader',
+                query: {
+                    cacheDirectory: true,
+                    presets: ['react']
+                }
+        }]
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
     }
-};
+}

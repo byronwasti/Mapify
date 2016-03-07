@@ -32,5 +32,15 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
+<<<<<<< HEAD
 # authentication
 auth.js
+=======
+# Don't push compiled code
+bundle.js
+
+# Swap files for vim
+*.swp
+
+
+>>>>>>> 6f4aacd29a805073673e0005097272d8731a3887

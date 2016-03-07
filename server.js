@@ -15,22 +15,16 @@ var passport = require('passport');
 var login = require('./login')(passport)
 var index = require('./routes/index')();
 
+
+var index = require('./routes/index')();
+
 var app = express();
-// compiler = webpack(config);
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-  next();
-});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));  
-// app.use(webpackMiddleware(compiler));  
-// app.use(webpackHotMiddleware(compiler));
 
 app.use(session({ secret: 'this is not a secret ;)',
   cookie:{},

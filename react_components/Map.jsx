@@ -1,4 +1,6 @@
 
-var Map = React.createClass({
+// var React = require("react");
 
-});
+// var Map = React.createClass({
+
+// });
