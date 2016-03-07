@@ -17,6 +17,12 @@ var index = require('./routes/index')();
 
 var app = express();
 // compiler = webpack(config);
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  next();
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -36,16 +42,16 @@ app.use(passport.session());
 
 app.get('/login', index.GETlogin);
 
-app.get('/auth/spotify',
+app.get('/auth/spotify', 
   passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'], showDialog: true}),
   function(req, res){
-
+  	// res.json({user: req.user});
 });
 
 app.get('/auth/spotify/callback',
   passport.authenticate('spotify', { failureRedirect: '/' }),
   function(req, res) {
-  	console.log("CALLBACK");
+  	console.log("CALLBACK: " + req.user.displayName);
     res.redirect('/');
   });
 
@@ -53,10 +59,6 @@ app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
-
-mongoose.connect('mongodb://mapify:olinjs@ds023408.mlab.com:23408/mapify', function(err){
-	if(err) console.log(err);
-})
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
