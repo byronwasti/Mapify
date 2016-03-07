@@ -17,6 +17,10 @@ module.exports = {
                     cacheDirectory: true,
                     presets: ['react']
                 }
+        },
+        {
+            test: require.resolve("react"), 
+            loader: "expose?React" 
         }]
     },
     resolve: {
