@@ -31,3 +31,11 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Don't push compiled code
+bundle.js
+
+# Swap files for vim
+*.swp
+
+
