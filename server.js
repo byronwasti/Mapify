@@ -6,12 +6,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+var index = require('./routes/index')();
+
 var app = express();
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false}));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));  
 
+app.get('/', index.home);
 
-app.listen(process.env.PORT || 3000);
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
+  console.log('Application running on port:', PORT);
+});
 
