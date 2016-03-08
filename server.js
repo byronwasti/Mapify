@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var webpack = require('webpack');
 var webpackMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
-var config = './webpack.config.js'
+var config = require('./webpack.config.js');
 var SpotifyStrategy = require('passport-spotify').Strategy;
 var passport = require('passport');
 var login = require('./login')(passport)
@@ -24,6 +24,22 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false}));
 app.use(cookieParser());
+const compiler = webpack(config);
+app.use(webpackMiddleware(compiler, 
+ {
+    stats: {
+        colors: true,
+        hash: false,
+        timings: true,
+        chunks: false,
+        chunkModules: false,
+        modules: false
+    }
+}
+));
+app.use(webpackHotMiddleware(compiler, {
+    log: console.log, path: '/__webpack_hmr', heartbeat: 10*1000
+}));
 app.use(express.static(path.join(__dirname, '/public')));  
 
 app.use(session({ secret: 'this is not a secret ;)',
