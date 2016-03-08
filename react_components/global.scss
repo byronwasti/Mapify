@@ -1,3 +1,49 @@
-body,html {
-    background: red;
+div {
+	/*border: solid 1px black;*/
+}
+
+.App {
+  background-color: purple;
+  height: 80vh;
+  margin: 2%;
+
+}
+
+.main-container {
+	height: 100%;
+}
+
+.content-container {
+	display: flex;
+	flex-flow: columns;
+	font-family: Helvetica;
+	height: 100%;
+
+}
+
+.navbar-container {
+	background-color: blue;
+}
+
+.sidebar-container {
+	background-color: red;
+	padding: 4%;
+}
+
+.mapbox-container {
+	background-color: yellow;
+	text-align: center;
+	width: 100%;
+}
+
+.musicbox-container {
+
+}
+
+.playlistbox-container {
+
+}
+
+.login-box{
+	background-color: white;
 }
