@@ -1,9 +1,17 @@
 var React = require("react");
 
+var CONTENTMAP = 'map',
+	CONTENTMUSIC = 'music',
+	CONTENTPLAYLIST = 'playlist';
+
 var Sidebar = React.createClass({
 	render: function(){
 		return (
-			<h1>I am a sidebar!</h1>
+			<div className="sidebar-container">
+				<h2>Map</h2>
+				<h2>Music</h2>
+				<h2>Playlist</h2>
+			</div>
 		)
 	}
 });

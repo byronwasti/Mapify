@@ -80,7 +80,9 @@ var App = React.createClass({
 					<Navbar
 						username={this.state.user.displayName}
 					/>
-					<Sidebar/>
+					<Sidebar
+						contentStatus={this.state.content}
+					/>
 					{content}
 				</div>
 			)
