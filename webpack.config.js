@@ -2,9 +2,13 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    entry: path.join(__dirname, '/react_components/App.jsx'),
+    entry: [
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+        './react_components/App.jsx'],
     output: {
-        path: path.join(__dirname, '/public/'),
+        //path: path.join(__dirname, '/public/'),
+        path: __dirname,
+        publicPath: '/',
         filename: 'bundle.js'
     },
     module: {
@@ -25,5 +29,10 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
-    }
-}
+    },
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ]
+};
