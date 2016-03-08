@@ -5,9 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo 'still needs to be implemented'",
-    "start": "npm run build && npm run server",
-    "build": "webpack",
-    "server": "node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
