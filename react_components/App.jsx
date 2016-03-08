@@ -7,6 +7,7 @@ var Navbar = require('./Navbar')
 var PlaylistBox = require('./PlaylistBox')
 var MusicBox = require('./MusicBox')
 var Sidebar = require('./Sidebar')
+var css = require('./global.scss');
 
 var CONTENTMAP = 'map',
 	CONTENTMUSIC = 'music',
