@@ -14,12 +14,10 @@ var CONTENTMAP = 'map',
 
 var App = React.createClass({
 	componentWillMount: function(){
-		console.log("I'm about to mount BITCH")
 		this.checkLogin()
 	},
 
 	getInitialState: function(){
-		console.log("Getting initial state")
 		return {
 			loggedIn: false,
 			user: {user:{}},
@@ -56,10 +54,8 @@ var App = React.createClass({
 	render: function(){
 
 		if (!this.state.loggedIn){
-			console.log("Not logged in", this.state.loggedIn)
 			var main = <LoginBox/>
 		} else {
-			console.log("Logged in", this.state.loggedIn)
 			var content;
 			switch(this.state.content){
 				case CONTENTMAP:
