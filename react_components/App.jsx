@@ -77,7 +77,9 @@ var App = React.createClass({
 
 			var main = (
 				<div className="main-container">
-					<Navbar/>
+					<Navbar
+						username={this.state.user.displayName}
+					/>
 					<Sidebar/>
 					{content}
 				</div>
