@@ -5,7 +5,7 @@ var Navbar = React.createClass({
 		return (
 			<div className='navbar-container'>
 				<h2>{this.props.username}</h2>
-				<a className="logout-button" href="/auth/spotify">Logout</a>;
+				<a className="logout-button" href="/logout">Logout</a>;
 			</div>
 		)
 	}
