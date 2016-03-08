@@ -3,7 +3,6 @@ div {
 }
 
 .App {
-  background-color: purple;
   height: 80vh;
   margin: 2%;
 
@@ -37,11 +36,15 @@ div {
 }
 
 .musicbox-container {
-
+	background-color: yellow;
+	text-align: center;
+	width: 100%;
 }
 
 .playlistbox-container {
-
+	background-color: yellow;
+	text-align: center;
+	width: 100%;
 }
 
 .login-box{
