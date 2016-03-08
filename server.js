@@ -34,34 +34,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/login', index.GETlogin);
+// Handle login/logout and auth routes
+app.get('/verifyLogin', index.verifyLogin);
+app.get('/logout', index.logout);
+app.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/' }), index.spotifyCallback);
 
 app.get('/auth/spotify', 
   passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'], showDialog: true}),
   function(req, res){
-  	// res.json({user: req.user});
-});
-
-app.get('/auth/spotify/callback',
-  passport.authenticate('spotify', { failureRedirect: '/' }),
-  function(req, res) {
-  	console.log("CALLBACK: " + req.user.displayName);
-    res.redirect('/');
-  });
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
-var PORT = process.env.PORT || 3000;
-app.listen(PORT, function() {
-  console.log('Application running on port:', PORT);
+    // res.json({user: req.user});
 });
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 }
+
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
+  console.log('Application running on port:', PORT);
+});
 
 module.exports = app;

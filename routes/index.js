@@ -1,14 +1,17 @@
 module.exports = function(){
-	return {	
-		// home: function(req, res){
-		// 	res.json({user: req.user});
-		// 	console.log("USERHOME: " + req.user);
-		// },
-
-		GETlogin: function(req, res){
-
-			console.log('Route User:' + req.user);
+	return {
+		verifyLogin: function(req, res){
 			res.json({user: req.user});
+		},
+
+		spotifyCallback: function(req, res){
+		  	console.log("CALLBACK: " + req.user.displayName);
+		    res.redirect('/');
+		},
+
+		logout: function(req, res){
+			req.logout();
+			res.redirect('/')
 		}
 	}
 }

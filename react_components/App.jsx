@@ -29,7 +29,7 @@ var App = React.createClass({
 
 	checkLogin: function(){
         $.ajax({
-			url: '/login',
+			url: '/verifyLogin',
 			dataType: 'json',
 			type: 'GET',
 			success: function(data) {
