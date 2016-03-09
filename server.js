@@ -15,15 +15,13 @@ var passport = require('passport');
 var login = require('./routes/login')(passport)
 var index = require('./routes/index')();
 
-
-var index = require('./routes/index')();
-
 var app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false}));
 app.use(cookieParser());
+
 const compiler = webpack(config);
 app.use(webpackMiddleware(compiler, 
  {
@@ -40,6 +38,7 @@ app.use(webpackMiddleware(compiler,
 app.use(webpackHotMiddleware(compiler, {
     log: console.log, path: '/__webpack_hmr', heartbeat: 10*1000
 }));
+
 app.use(express.static(path.join(__dirname, '/public')));  
 
 app.use(session({ secret: 'this is not a secret ;)',
@@ -49,17 +48,23 @@ app.use(session({ secret: 'this is not a secret ;)',
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // Handle login/logout and auth routes
 app.get('/verifyLogin', index.verifyLogin);
 app.get('/logout', index.logout);
 app.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/' }), index.spotifyCallback);
 
 app.get('/auth/spotify', 
-  passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'], showDialog: true}),
+  passport.authenticate('spotify', {scope: ['user-read-email','user-read-birthdate', 'user-read-private'], showDialog: true}),
   function(req, res){
+      console.log("autorization"+ req);
+    //req.session.spotifyUser = req.user;
     // res.json({user: req.user});
 });
+
+app.get('/api/echonest', index.echonest);
+app.get('/api/spotify', index.spotify);
+app.get('/api/spotify2', index.spotify2);
+app.get('/api/lookupMusic', index.lookupMusic);
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
