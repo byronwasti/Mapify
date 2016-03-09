@@ -51,6 +51,24 @@ var App = React.createClass({
         });
 	},
 
+	onMusicTypeSubmit: function(lookup){
+
+		console.log("SUBMITTED FORM: ", lookup);
+
+		$.ajax({
+			url: '/api/lookupMusic',
+			dataType: 'json',
+			type: 'POST',
+			data: lookup,
+			success: function(data){
+				console.log("Data Back: ", data);
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
+	},
+
 	render: function(){
 
 		if (!this.state.loggedIn){
@@ -65,7 +83,8 @@ var App = React.createClass({
 					break;
 				case CONTENTMUSIC:
 					content = (
-						<MusicBox/>
+						<MusicBox 
+							onMusicTypeSubmit={this.onMusicTypeSubmit}/>
 					)
 					break;
 				case CONTENTPLAYLIST:
