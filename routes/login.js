@@ -23,6 +23,7 @@ module.exports = function(passport){
 
   	function(accessToken, refreshToken, profile, done){
   		console.log("LOGGING IN");
+        profile.accessToken = accessToken;
   		done(null, profile);
   	}));
 }

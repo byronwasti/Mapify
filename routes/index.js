@@ -56,7 +56,7 @@ module.exports = function(){
                 qs: {
                 },
                 headers: {
-                    Authorization: req.session.passport.user.accessToken
+                    Authorization: 'Bearer ' + req.session.passport.user.accessToken
                 },
                 json: true
             })
@@ -65,6 +65,29 @@ module.exports = function(){
             })
             .catch(function(err){
                 res.json(err);
+            });
+        },
+
+        lookupMusic: function(req, res){
+            rp({
+                method: 'GET',
+                uri: 'https://api.spotify.com/v1/search',
+                qs: {
+                    q: req.query.input,
+                    type: req.query.type
+                },
+                json: true
+            })
+            .then(function(songs){
+                artist_id = songs.artists.items[0].id;
+                return rp({
+                    method: 'GET',
+                    uri: 'https://api.spotify.com/v1/artists/'+artist_id+'/related-artists',
+                    json: true
+                })
+            })
+            .then(function(songs){
+                res.json(songs);
             });
         }
 	}

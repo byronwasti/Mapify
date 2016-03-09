@@ -54,7 +54,7 @@ app.get('/logout', index.logout);
 app.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/' }), index.spotifyCallback);
 
 app.get('/auth/spotify', 
-  passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'], showDialog: true}),
+  passport.authenticate('spotify', {scope: ['user-read-email','user-read-birthdate', 'user-read-private'], showDialog: true}),
   function(req, res){
       console.log("autorization"+ req);
     //req.session.spotifyUser = req.user;
@@ -64,6 +64,7 @@ app.get('/auth/spotify',
 app.get('/api/echonest', index.echonest);
 app.get('/api/spotify', index.spotify);
 app.get('/api/spotify2', index.spotify2);
+app.get('/api/lookupMusic', index.lookupMusic);
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
