@@ -22,7 +22,6 @@ var App = React.createClass({
 		return {
 			loggedIn: false,
 			user: {user:{}},
-			content: CONTENTMAP
 		}
 	},
 
@@ -79,12 +78,12 @@ var App = React.createClass({
 			var main = (
 				<div className="main-container">
 					<Navbar
-						username={this.state.user.displayName}
-					/>
-					<Sidebar
-						contentStatus={this.state.content}
-					/>
-					{content}
+						username={this.state.user.displayName}/>
+					<div className="content-container">
+						<Sidebar 
+							contentStatus={this.state.content}/>
+						{content}
+					</div>
 				</div>
 			)
 		}
@@ -98,6 +97,6 @@ var App = React.createClass({
 });
 
 ReactDOM.render(
-	<App/>,
+	<App />,
 	document.getElementById('content')
 );
