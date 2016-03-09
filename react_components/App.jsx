@@ -8,6 +8,7 @@ var Navbar = require('./Navbar')
 var PlaylistBox = require('./PlaylistBox')
 var MusicBox = require('./MusicBox')
 var Sidebar = require('./Sidebar')
+var css = require('./global.scss');
 
 var CONTENTMAP = 'map',
 	CONTENTMUSIC = 'music',
@@ -22,7 +23,6 @@ var App = React.createClass({
 		return {
 			loggedIn: false,
 			user: {user:{}},
-			content: CONTENTMAP
 		}
 	},
 
@@ -36,7 +36,7 @@ var App = React.createClass({
 					this.setState({
 						user: data.user,
 						loggedIn: true,
-						content: CONTENTMAP
+						content: CONTENTMUSIC
 					});
 				} else {
 					this.setState({
@@ -50,6 +50,24 @@ var App = React.createClass({
 				console.log("ERROR: " + err);
 			}.bind(this)
         });
+	},
+
+	onMusicTypeSubmit: function(lookup){
+
+		console.log("SUBMITTED FORM: ", lookup);
+
+		$.ajax({
+			url: '/api/lookupMusic',
+			dataType: 'json',
+			type: 'GET',
+			data: lookup,
+			success: function(data){
+				console.log("Data Back: ", data);
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
 	},
 
 	render: function(){
@@ -68,7 +86,8 @@ var App = React.createClass({
 					break;
 				case CONTENTMUSIC:
 					content = (
-						<MusicBox/>
+						<MusicBox 
+							onMusicTypeSubmit={this.onMusicTypeSubmit}/>
 					)
 					break;
 				case CONTENTPLAYLIST:
@@ -81,12 +100,12 @@ var App = React.createClass({
 			var main = (
 				<div className="main-container">
 					<Navbar
-						username={this.state.user.displayName}
-					/>
-					<Sidebar
-						contentStatus={this.state.content}
-					/>
-					{content}
+						username={this.state.user.displayName}/>
+					<div className="content-container">
+						<Sidebar 
+							contentStatus={this.state.content}/>
+						{content}
+					</div>
 				</div>
 			)
 		}
@@ -99,8 +118,15 @@ var App = React.createClass({
 	}
 });
 
+<<<<<<< HEAD
 
 GoogleMaps.LIBRARIES = ['places'];
 GoogleMaps.load(function (google) {
     ReactDOM.render(<App mapService={google}/>, document.getElementById('content'));
 });
+=======
+ReactDOM.render(
+	<App />,
+	document.getElementById('content')
+);
+>>>>>>> e2e42eefbe10592349fe40e115f7988e38e4a999
