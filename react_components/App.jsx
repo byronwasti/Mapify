@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var GoogleMaps = require('google-maps');
 
 var MapBox = require('./MapBox')
 var LoginBox = require('./LoginBox')
@@ -60,7 +61,9 @@ var App = React.createClass({
 			switch(this.state.content){
 				case CONTENTMAP:
 					content = (
-						<MapBox/>
+						<MapBox
+							mapService = {this.props.mapService}
+						/>
 					)
 					break;
 				case CONTENTMUSIC:
@@ -96,7 +99,8 @@ var App = React.createClass({
 	}
 });
 
-ReactDOM.render(
-	<App/>,
-	document.getElementById('content')
-);
+
+GoogleMaps.LIBRARIES = ['places'];
+GoogleMaps.load(function (google) {
+    ReactDOM.render(<App mapService={google}/>, document.getElementById('content'));
+});
