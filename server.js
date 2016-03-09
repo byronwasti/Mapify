@@ -12,7 +12,7 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config.js');
 var SpotifyStrategy = require('passport-spotify').Strategy;
 var passport = require('passport');
-var login = require('./login')(passport)
+var login = require('./routes/login')(passport)
 var index = require('./routes/index')();
 
 var app = express();
