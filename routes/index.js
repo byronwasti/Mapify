@@ -88,6 +88,10 @@ module.exports = function(){
             })
             .then(function(songs){
                 res.json(songs);
+            })
+            .catch(function(err){
+                console.log(err);
+                console.error("THERE WAS A FUCKING ERROR!");
             });
         }
 	}

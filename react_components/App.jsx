@@ -58,7 +58,7 @@ var App = React.createClass({
 		$.ajax({
 			url: '/api/lookupMusic',
 			dataType: 'json',
-			type: 'POST',
+			type: 'GET',
 			data: lookup,
 			success: function(data){
 				console.log("Data Back: ", data);

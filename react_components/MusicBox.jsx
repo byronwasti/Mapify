@@ -22,7 +22,7 @@ var MusicBox = React.createClass({
 			input: input
 		} 
 
-		this.props.onMusicTypeSubmit({lookup: lookup});
+		this.props.onMusicTypeSubmit(lookup);
 		this.setState({input: ''});
 	},
 
