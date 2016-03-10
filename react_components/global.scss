@@ -1,5 +1,12 @@
+$blue500: #2196F3;
+$blue50: #E3F2FD;
+$black: #000000;
+$green800: #2E7D32;
+$green600: #43A047;
+$white: #FFFFFF;
+
+
 div {
-	/*border: solid 1px black;*/
 }
 
 .App {
@@ -48,5 +55,25 @@ div {
 }
 
 .login-box{
-	background-color: white;
+	text-align: center;
 }
+
+.login-header{
+	font-family: Helvetica;
+	font-size: 5em;
+}
+
+.login-button{
+	background-color: $green600;
+	text-decoration: none;
+	text-align: center;
+	font-size: 1em;
+	font-family: Helvetica;
+	padding-top: 2%;	
+	padding-bottom: 2%;
+	padding-left: 15%;
+	padding-right: 15%;
+	border-radius: 2em;
+	color: $white;
+}
+
