@@ -36,7 +36,7 @@ var App = React.createClass({
 					this.setState({
 						user: data.user,
 						loggedIn: true,
-						content: CONTENTMUSIC
+						content: CONTENTMAP
 					});
 				} else {
 					this.setState({
@@ -118,15 +118,7 @@ var App = React.createClass({
 	}
 });
 
-<<<<<<< HEAD
-
 GoogleMaps.LIBRARIES = ['places'];
 GoogleMaps.load(function (google) {
     ReactDOM.render(<App mapService={google}/>, document.getElementById('content'));
 });
-=======
-ReactDOM.render(
-	<App />,
-	document.getElementById('content')
-);
->>>>>>> e2e42eefbe10592349fe40e115f7988e38e4a999

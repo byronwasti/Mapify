@@ -15,6 +15,28 @@ var Map = React.createClass({
 		this.customStyle = customStyle;
 	},
 
+  componentWillReceiveProps: function(nextProps) {
+
+    var origin = nextProps.waypoints.Origin;
+    var destination = nextProps.waypoints.Destination;
+    console.log("NEXTPROPS")
+    console.log(nextProps)
+    console.log(nextProps.waypoints.Origin);
+    console.log(nextProps.waypoints.Destination);
+
+    var directionsRequest = {
+      origin: origin,
+      destination: destination,
+      travelMode: google.maps.TravelMode.DRIVING
+    }
+
+    directionsService.route(directionsRequest, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        }
+    });
+  },
+
 	componentDidMount: function () {
 
         var google = this.props.mapService;
@@ -49,16 +71,16 @@ var Map = React.createClass({
     },
 
     renderMap: function (mapOptions, customStyle) {
-        var google = this.props.mapService,
-            mapCanvas = document.getElementById('map'),
-            vH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        mapCanvas.style.height = vH + 'px';
+      var google = this.props.mapService,
+          mapCanvas = document.getElementById('map'),
+          vH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      mapCanvas.style.height = vH + 'px';
 
-        this.map = new google.maps.Map(mapCanvas, mapOptions);
-        this.map.mapTypes.set(customStyle.customMapTypeId, customStyle.customMapType);
+      this.map = new google.maps.Map(mapCanvas, mapOptions);
+      this.map.mapTypes.set(customStyle.customMapTypeId, customStyle.customMapType);
   		this.map.setMapTypeId(customStyle.customMapTypeId);
 
-        directionsDisplay.setMap(this.map);
+      directionsDisplay.setMap(this.map);
     },
 
     render: function () {

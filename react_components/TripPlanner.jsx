@@ -14,7 +14,7 @@ var TripPlanner = React.createClass({
 	},
 
 	onWaypointChange: function(e){
-		state = {};
+		var state = {};
 		state[e.target.placeholder] = e.target.value;
 		this.setState(state)
 	},

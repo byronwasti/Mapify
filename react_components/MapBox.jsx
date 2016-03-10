@@ -5,6 +5,15 @@ var TripPlanner = require('./TripPlanner')
 
 var MapBox = React.createClass({
 
+	getInitialState: function(){
+		return {
+			waypoints: {
+				'Origin': '',
+				'Destination': ''
+			}
+		}
+	},
+
 	updateWaypoints: function(newWaypoints){
 		this.setState({
 			waypoints: newWaypoints
@@ -19,6 +28,7 @@ var MapBox = React.createClass({
 				/>
 				<Map
 					mapService = {this.props.mapService}
+					waypoints = {this.state.waypoints}
 				/>
 			</div>
 		)
