@@ -1,0 +1,18 @@
+@import 'global';
+
+.navbar-container {
+
+}
+
+.navbar-name{
+}
+
+.logout-button{
+	text-decoration: none;
+	color: $white;
+	background-color: $green600;
+	font-size: 0.5em;
+	border-radius: 2em;
+	padding: 5px 5px 5px 5px;
+	float: right;
+}
