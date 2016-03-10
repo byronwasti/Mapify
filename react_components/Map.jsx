@@ -32,7 +32,8 @@ var Map = React.createClass({
 
     directionsService.route(directionsRequest, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
+          console.log(response);
+          directionsDisplay.setDirections(response);
         }
     });
   },
