@@ -1,0 +1,31 @@
+@import 'global';
+
+.musicbox-container {
+	// background-color: $blue300;
+	text-align: center;
+	width: 100%;
+}
+
+.musicbox-header{
+
+}
+
+.musicbox-input{
+	background-color: $grey100;
+	border: none;
+	padding: 10px 3% 10px 3%;
+	font-size: 16px;
+	border-radius: 0.2em;
+}
+
+.musicbox-generate {
+	border-radius: 2em;
+	font-size: 1em;
+	border: none;
+	margin: 2%;
+	text-align: center;
+	background-color: $green600;
+	color: white;
+	padding: 10px 5% 10px 5%;
+	margin-top: 2em;
+}

@@ -1,5 +1,5 @@
 var React = require("react");
-var css = ('loginbox.scss');
+var css = require('./loginbox.scss');
 
 var LoginBox = React.createClass({
     render: function(){

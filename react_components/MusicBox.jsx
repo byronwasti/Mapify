@@ -1,4 +1,5 @@
 var React = require("react");
+var css = require("./musicbox.scss");
 
 var MusicBox = React.createClass({
 
@@ -29,13 +30,15 @@ var MusicBox = React.createClass({
 	render: function(){
 		return (
 			<form className="musicbox-container" onSubmit={this.handleSubmit}>
-				<h1>I am a musicbox!</h1>
+				<h1 className="musicbox-header">Favorite Artist?</h1>
 				<input 
+					className="musicbox-input"
 					type="text" 
-					placeholder="enter your favorite artist" 
+					placeholder="e.g. JAY-Z" 
 					value={this.state.input}
 					onChange={this.handleInputChange}/>
-				<input type="submit" value="Generate" /> 
+				<br />
+				<input className="musicbox-generate" type="submit" value="GENERATE" /> 
 			</form>
 		)
 	}

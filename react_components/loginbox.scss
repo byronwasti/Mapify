@@ -1,8 +1,19 @@
+@import 'global';
+
+.login-box{
+	text-align: center;
+}
+
+.login-header{
+	font-size: 5em;
+}
+
 .login-button{
 	background-color: $green600;
 	text-decoration: none;
 	text-align: center;
-	font-family: Helvetica;
-	padding: 2%;
-	border-radius: 5px;
+	font-size: 1em;
+	padding: 2% 15% 2% 15%;
+	border-radius: 2em;
+	color: $white;
 }
