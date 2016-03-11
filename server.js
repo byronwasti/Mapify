@@ -63,6 +63,7 @@ app.get('/auth/spotify',
 });
 
 app.get('/api/lookupMusic', index.lookupMusic);
+app.post('/api/setDuration', index.setDuration);
 
 
 function ensureAuthenticated(req, res, next) {
