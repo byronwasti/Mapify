@@ -4,13 +4,16 @@ var async = require('async');
 
 var filterByTime = function(req, songs){
     // REMOVE THIS LINE
-    var tmp_LONG_TIME = 2233;
+    var duration = req.session.duration;
+
+    console.log("DURATION")
+    console.log(duration)
     var total_time = 0;
     var output = [];
     console.log(songs.length);
     debugger;
     
-    while( total_time < tmp_LONG_TIME ){
+    while( total_time < duration ){
         if( songs.length < 1 ){
             return output;
         }
