@@ -20,6 +20,61 @@ module.exports = function(){
 			res.redirect('/')
 		},
 
+        sendDuration: function(req, res){
+            
+        },
+
+        echonest: function(req,res){
+            rp({
+                method: 'GET',
+                uri: 'http://developer.echonest.com/api/v4/song/search',
+                qs: {
+                    api_key: auth.ECHONEST_API_KEY,
+                    format: 'json',
+                    artist: 'radiohead'
+                },
+                json: true
+            })
+            .then(function(songs){
+                res.json(songs);
+            });
+        },
+
+        spotify: function(req, res){
+            rp({
+                method: 'GET',
+                uri: 'https://api.spotify.com/v1/search',
+                qs: {
+                    q: 'radiohead',
+                    type: 'artist'
+                },
+                json: true
+            })
+            .then(function(songs){
+                res.json(songs);
+            });
+        },
+
+        spotify2: function(req, res){
+            console.log(req.session.passport.user.accessToken);
+            rp({
+                method: 'GET',
+                uri: 'https://api.spotify.com/v1/me',
+                qs: {
+                },
+                headers: {
+                    Authorization: 'Bearer ' + req.session.passport.user.accessToken
+                },
+                json: true
+            })
+            .then(function(profile){
+                res.json(profile);
+            })
+            .catch(function(err){
+                res.json(err);
+            });
+        },
+
         lookupMusic: function(req, res){
             echonest_search(req, res);
         }
