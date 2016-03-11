@@ -57,8 +57,7 @@ var App = React.createClass({
 		console.log("SUBMITTED FORM: ", lookup);
 
 		$.ajax({
-			//url: '/api/lookupMusic',
-			url: '/api/spotify3',
+			url: '/api/lookupMusic',
 			dataType: 'json',
 			type: 'GET',
 			data: lookup,
