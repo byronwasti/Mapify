@@ -1,5 +1,21 @@
+$blue50: #E3F2FD;
+$blue300: #4DD0E1;
+$blue500: #2196F3;
+$black: #000000;
+$green800: #2E7D32;
+$green600: #43A047;
+$white: #FFFFFF;
+$grey100: #CFD8DC;
+$grey900: #263238;
+$grey800: #37474F;
+
+body{
+	background-color: $grey900;
+}
+
 div {
-	/*border: solid 1px black;*/
+	font-family: Helvetica;
+	color: $white;
 }
 
 .App {
@@ -15,38 +31,13 @@ div {
 .content-container {
 	display: flex;
 	flex-flow: columns;
-	font-family: Helvetica;
 	height: 100%;
-
-}
-
-.navbar-container {
-	background-color: blue;
-}
-
-.sidebar-container {
-	background-color: red;
-	padding: 4%;
 }
 
 .mapbox-container {
-	background-color: yellow;
 	text-align: center;
 	width: 100%;
 }
 
-.musicbox-container {
-	background-color: yellow;
-	text-align: center;
-	width: 100%;
-}
 
-.playlistbox-container {
-	background-color: yellow;
-	text-align: center;
-	width: 100%;
-}
 
-.login-box{
-	background-color: white;
-}

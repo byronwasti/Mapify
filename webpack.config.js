@@ -21,7 +21,7 @@ module.exports = {
             loader: 'babel-loader',
             query: {
                 cacheDirectory: true,
-                presets: ['react']
+                presets: ['react', 'es2015']
             }
         },
         {
