@@ -47,15 +47,20 @@ module.exports = function(){
                 console.log(req.body);
                 songs = req.body['songs[]'];
                 console.log(songs);
+                if( typeof(songs.length) === typeof(Array) ){
+                    songs = songs.filter(function(elem){
+                        return elem.length == 36;
+                    });
+                }
 
-                if( songs.length > 100 ){
-                    songs.splice(0,99);
+                if( Number(songs.length) > 100 ){
+                    songs = songs.splice(0,99);
                 }
 
                 console.log(result.id);
-                songs = songs.reduce(function(prev, cur){
-                    return prev + ','+cur;
-                });
+                console.log(songs);
+                console.log(songs.length);
+
                 return rp({
                     method: 'POST',
                     uri: 'https://api.spotify.com/v1/users/'+req.user.id+'/playlists/'+result.id+'/tracks',
@@ -63,10 +68,16 @@ module.exports = function(){
                         Authorization: 'Bearer ' + req.user.accessToken,
                         'Content-Type': 'application/json'
                     },
+                    /*
                     qs: {
                         'uris': songs
                     },
-                    useQuerystring: true,
+                    */
+                    body: {
+                        uris: songs
+                    },
+                    json: true
+                    //useQuerystring: true,
                 });
             })
             .then(function(after){
@@ -75,6 +86,7 @@ module.exports = function(){
             .catch(function(err){
                 console.error(err);
                 console.error(err.error.error);
+                console.error("There was an error :(");
             });
         },
 

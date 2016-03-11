@@ -76,6 +76,9 @@ var App = React.createClass({
 			data: lookup,
 			success: function(data){
 				console.log("Data Back: ", data);
+                if(data.statusCode == 429){
+                    alert("Sorry! Things broke because our API got overloaded. Please wait a minute and try again");
+                }
                 this.setState({content: CONTENTPLAYLIST, songList: data});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -87,9 +90,12 @@ var App = React.createClass({
     addPlaylistToSpotify: function(){
         console.log(this.state.songList);
         var that = this;
-        var songs = this.state.songList.map(function(elem){
-            console.log(elem);
+        var songs = this.state.songList.filter(function(elem){
+            return elem.tracks[0] !== undefined;
+        }).map(function(elem){
             if( elem.tracks[0] == undefined){
+                console.log('FUCKING ERROR');
+                console.log(elem);
             } else {
                 return elem.tracks[0].foreign_id;
             }
