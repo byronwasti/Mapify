@@ -20,6 +20,14 @@ var MapBox = React.createClass({
 						placeDetails:''
 					}
 				],
+				stats:{
+					duration:{
+						text:''
+					},
+					distance:{
+						text:''
+					}
+				}
 			}
 		}
 	},

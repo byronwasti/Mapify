@@ -1,5 +1,6 @@
 var React = require("react");
 var Waypoint = require("./Waypoint")
+var StatsBox = require("./StatsBox")
 
 var TripPlanner = React.createClass({
 
@@ -54,25 +55,37 @@ var TripPlanner = React.createClass({
 	render: function(){
 		var origin = this.props.route.waypoints[0]
 		var destination = this.props.route.waypoints[1]
-		return (
-			<div className = "waypoints-container">
-				<Waypoint
-                    index={0}
-                    mapService={this.props.mapService}
-                    waypoint={origin}
-                    editing={this.state.editingAt === 0}
-                    selected={this.state.selected === 0}
-                    onAction={this.onWaypointAction.bind(this, 0)}
-                />
 
-				<Waypoint
-                    index={1}
-                    mapService={this.props.mapService}
-                    waypoint={destination}
-                    editing={this.state.editingAt === 1}
-                    selected={this.state.selected === 1}
-                    onAction={this.onWaypointAction.bind(this, 1)}
-                />
+		return (
+			<div className = "trip-planner-container">
+
+				<div className = "trip-stats-container">
+					<StatsBox
+						duration={this.props.route.stats.duration.text}
+						distance={this.props.route.stats.distance.text}
+					/>
+				</div>
+
+
+				<div className = "waypoints-container">
+					<Waypoint
+	                    index={0}
+	                    mapService={this.props.mapService}
+	                    waypoint={origin}
+	                    editing={this.state.editingAt === 0}
+	                    selected={this.state.selected === 0}
+	                    onAction={this.onWaypointAction.bind(this, 0)}
+	                />
+
+					<Waypoint
+	                    index={1}
+	                    mapService={this.props.mapService}
+	                    waypoint={destination}
+	                    editing={this.state.editingAt === 1}
+	                    selected={this.state.selected === 1}
+	                    onAction={this.onWaypointAction.bind(this, 1)}
+	                />
+	            </div>
 			</div>
 		)
 	}
