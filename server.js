@@ -53,6 +53,7 @@ app.get('/verifyLogin', index.verifyLogin);
 app.get('/logout', index.logout);
 app.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/' }), index.spotifyCallback);
 
+
 app.get('/auth/spotify', 
   passport.authenticate('spotify', {scope: ['user-read-email','user-read-birthdate', 'user-read-private'], showDialog: true}),
   function(req, res){
@@ -61,7 +62,7 @@ app.get('/auth/spotify',
     // res.json({user: req.user});
 });
 
-
+app.get('/api/lookupMusic', index.lookupMusic);
 
 
 function ensureAuthenticated(req, res, next) {

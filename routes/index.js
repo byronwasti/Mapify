@@ -2,7 +2,6 @@ var rp = require('request-promise');
 var request = require('request');
 var async = require('async');
 var auth = require('../auth');
-var spotify_search = require('./spotify');
 var echonest_search = require('./echonest');
 
 module.exports = function(){
@@ -19,7 +18,11 @@ module.exports = function(){
 		logout: function(req, res){
 			req.logout();
 			res.redirect('/')
-		}
+		},
+
+        lookupMusic: function(req, res){
+            echonest_search(req, res);
+        }
 
 	}
 }
