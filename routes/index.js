@@ -29,16 +29,18 @@ module.exports = function(){
         },
 
         thirtySecondSample: function(req, res){
+            console.log(req.query);
+            var id = req.query.id.split(':')[2];
             rp({
                 method: 'GET',
-                uri: 'https://api.spotify.com/v1/tracks/'+req.query.id,
+                uri: 'https://api.spotify.com/v1/tracks/'+id,
                 json: true
             })
             .then(function(result){
                 res.json(result);
             })
             .catch(function(err){
-                console.error(err);
+                console.error(err.error.error);
                 res.json(err);
             });
         }

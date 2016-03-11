@@ -37,7 +37,8 @@ var App = React.createClass({
 					this.setState({
 						user: data.user,
 						loggedIn: true,
-						content: CONTENTMAP
+						//content: CONTENTMAP
+						content: CONTENTMUSIC
 					});
 				} else {
 					this.setState({
