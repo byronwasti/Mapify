@@ -53,24 +53,38 @@ module.exports = function(){
 
                 // Can only add 100 songs at a time...
                 if( Number(songs.length) > 100 ){
-                    songs = songs.splice(0,99);
-                }
+                    var songsOptions = [];
 
-                return rp({
-                    method: 'POST',
-                    uri: 'https://api.spotify.com/v1/users/'+req.user.id+'/playlists/'+result.id+'/tracks',
-                    headers: {
-                        Authorization: 'Bearer ' + req.user.accessToken,
-                        'Content-Type': 'application/json'
-                    },
-                    body: {
-                        uris: songs
-                    },
-                    json: true
+                    for( var i = 0; i < (songs.length % 100); i++){
+                        songsOptions.push( songs.splice(i*100,i*100+99) );
+                    }
+                } else {
+                    var songsOptions = [songs];
+                } 
+
+                songsOptions = songsOptions.map(function(elem){
+                    return {
+                        method: 'POST',
+                        uri: 'https://api.spotify.com/v1/users/'+req.user.id+'/playlists/'+result.id+'/tracks',
+                        headers: {
+                            Authorization: 'Bearer ' + req.user.accessToken,
+                            'Content-Type': 'application/json'
+                        },
+                        body: {
+                            uris: elem
+                        },
+                        json: true
+                    }
                 });
-            })
-            .then(function(after){
-                res.json({});
+
+                async.map( songsOptions, request, function(err, results){
+                    if( err ){
+                        console.error(err);
+                        res.json({error: true});
+                    } else {
+                        res.json({error: false});
+                    }
+                });
             })
             .catch(function(err){
                 console.error(err);

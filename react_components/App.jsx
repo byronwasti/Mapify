@@ -110,12 +110,18 @@ var App = React.createClass({
             type: 'POST',
             data: {songs: songs},
             success: function(data){
-                console.log("Success!");
-                alert('Added Playlist to Spotify! Another Route?');
+                if( data.error ){
+                    alert('Uh oh! Something went wrong! Please try again or contact the server admin');
+                } else {
+                    console.log("Success!");
+                    alert('Added Playlist to Spotify! Another Route?');
+                }
                 that.setState({content: CONTENTMAP});
             },
 			error: function(xhr, status, err){
 				console.error(this.props.url, status, err.toString());
+                alert('Uh oh! Something went wrong! Your route may be too long for right now. We are working on fixing a bug that allows for massive playlists.');
+                this.setState({content: CONTENTMAP});
 			}.bind(this)
         });
     },

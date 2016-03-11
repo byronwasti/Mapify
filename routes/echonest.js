@@ -5,7 +5,7 @@ var async = require('async');
 var filterByTime = function(req, songs){
     var total_time = 0;
     var output = [];
-    var tripDur = Number(req.user.tripDuration.duration);
+    var tripDur = Number(req.user.tripDuration.duration)*2;
     
     while( total_time < tripDur ){
         if( songs.length < 1 ){
@@ -14,7 +14,6 @@ var filterByTime = function(req, songs){
 
         // Select a random song
         var random = Math.floor(Math.random()*songs.length );
-        console.log(random + ',' + songs.length);
 
         var song = songs[random];
         songs.splice(random, 1);
