@@ -15,7 +15,8 @@ var Sidebar = React.createClass({
 		var highlightStyle = {
 		  'background': '#616161',
 		  'border-radius': '1em',
-		  'padding-left': '10px'
+		  'padding-left': '10px',
+		  'padding-right': '10px'
 		};
 
 		switch(this.props.contentStatus){
