@@ -3,7 +3,6 @@ var request = require('request');
 var async = require('async');
 
 var filterByTime = function(req, songs){
-    // REMOVE THIS LINE
     var total_time = 0;
     var output = [];
     
