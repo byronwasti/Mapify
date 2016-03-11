@@ -88,7 +88,7 @@ var Map = React.createClass({
     var google = this.props.mapService,
       mapCanvas = document.getElementById('map'),
       vH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    mapCanvas.style.height = vH + 'px';
+    mapCanvas.style.height = 80 + 'vh';
 
     this.map = new google.maps.Map(mapCanvas, mapOptions);
     this.map.mapTypes.set(customStyle.customMapTypeId, customStyle.customMapType);

@@ -1,0 +1,48 @@
+@import 'global';
+
+
+.mapbox-container {
+
+}
+
+p {
+	margin: 0px !important;
+}
+
+.trip-planner-container {
+	display: flex;
+	flex-flow: column;
+	position: absolute;
+	z-index: 2;
+	background: rgba(70, 70, 70, 0.7);
+	padding: 10px;
+	margin: 20px 0px 0px 20px;
+}
+
+.route-stats-container h1{
+	margin: 5px;
+	z-index:3;
+}
+
+.waypoints-container{
+	display: flex;
+	flex-flow: row;
+}
+
+.way-point{
+	background-color: $grey800;
+	margin: 2%;
+}
+
+.submit-route-button {
+	border: none;
+	background-color: $green600;
+	color: $white;
+	border-radius: 2em;
+	font-size: 1em;
+	padding: 5px 5% 5px 5%;
+}
+
+.route-map{
+	margin: 0px 10px 20px 10px;
+}

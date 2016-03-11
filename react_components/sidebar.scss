@@ -1,0 +1,33 @@
+@import 'global';
+
+
+
+.sidebar-container {
+	background-color: $grey800;
+	padding: 5% 10% 5% 5%;
+	display: flex;
+	flex-flow: column;
+}
+
+.material-icons {
+	padding-right: 5%;
+	vertical-align: text-bottom;
+}
+
+.header-1{
+
+	vertical-align: center;
+}
+
+.header-2{
+	display: flex;
+	flex-flow: row;
+	vertical-align: center;
+
+}
+
+.header-3{
+	display: flex;
+	flex-flow: row;
+	vertical-align: center;
+}

@@ -62,8 +62,7 @@ var TripPlanner = React.createClass({
 				<div className = "trip-stats-container">
 					<StatsBox
 						duration={this.props.route.stats.duration.text}
-						distance={this.props.route.stats.distance.text}
-					/>
+						distance={this.props.route.stats.distance.text}/>
 				</div>
 
 
@@ -74,8 +73,7 @@ var TripPlanner = React.createClass({
 	                    waypoint={origin}
 	                    editing={this.state.editingAt === 0}
 	                    selected={this.state.selected === 0}
-	                    onAction={this.onWaypointAction.bind(this, 0)}
-	                />
+	                    onAction={this.onWaypointAction.bind(this, 0)}/>
 
 					<Waypoint
 	                    index={1}
@@ -83,11 +81,14 @@ var TripPlanner = React.createClass({
 	                    waypoint={destination}
 	                    editing={this.state.editingAt === 1}
 	                    selected={this.state.selected === 1}
-	                    onAction={this.onWaypointAction.bind(this, 1)}
-	                />
+	                    onAction={this.onWaypointAction.bind(this, 1)}/>
 	            </div>
 
-	            <button onClick={this.props.onSubmitRoute}>Submit Route</button>
+	            <input 
+	            	className="submit-route-button"
+	            	type="button" 
+	            	onClick={this.props.onSubmitRoute} 
+	            	value="Submit Route"/>
 			</div>
 		)
 	}

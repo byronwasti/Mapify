@@ -1,7 +1,7 @@
 var React = require("react");
-
-var Map = require('./Map')
-var TripPlanner = require('./TripPlanner')
+var Map = require('./Map');
+var TripPlanner = require('./TripPlanner');
+var css = require('./mapbox.scss');
 
 var MapBox = React.createClass({
 
@@ -79,13 +79,11 @@ var MapBox = React.createClass({
 					updateWaypoints={this.updateWaypoints}
 					mapService={this.props.mapService}
 					route={this.state.route}
-					onSubmitRoute={this.submitRoute}
-				/>
+					onSubmitRoute={this.submitRoute}/>
 				<Map
 					mapService = {this.props.mapService}
 					route = {this.state.route}
-					updateRouteStats = {this.updateRouteStats}
-				/>
+					updateRouteStats = {this.updateRouteStats}/>
 			</div>
 		)
 	}

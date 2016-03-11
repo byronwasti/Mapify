@@ -23,6 +23,7 @@ var App = React.createClass({
 		return {
 			loggedIn: false,
 			user: {user:{}},
+            songList: []
 		}
 	},
 
@@ -69,12 +70,16 @@ var App = React.createClass({
 			data: lookup,
 			success: function(data){
 				console.log("Data Back: ", data);
+                this.setState({content: CONTENTPLAYLIST, songList: data});
 			}.bind(this),
 			error: function(xhr, status, err){
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
 		});
 	},
+
+    addPlaylistToSpotify: function(){
+    },
 
 	render: function(){
 
@@ -100,7 +105,9 @@ var App = React.createClass({
 					break;
 				case CONTENTPLAYLIST:
 					content = (
-						<PlaylistBox/>
+						<PlaylistBox
+                            addToSpotify={this.addPlaylistToSpotify}
+                            songList={this.state.songList}/>
 					)
 					break;
 			}
