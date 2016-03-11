@@ -40,7 +40,7 @@ var Song = React.createClass({
         return {
             play: false,
             data: undefined,
-            play_object: {}
+            play_object: {},
         }
     },
 
@@ -94,5 +94,6 @@ var AddButton = React.createClass({
 		);
 	}
 });
+
 
 module.exports = PlaylistBox;

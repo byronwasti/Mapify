@@ -23,7 +23,7 @@ var App = React.createClass({
 		return {
 			loggedIn: false,
 			user: {user:{}},
-            songList: []
+            songList: [],
 		}
 	},
 
@@ -59,6 +59,12 @@ var App = React.createClass({
 		})
 	},
 
+	toMap: function(){
+		this.setState({
+			content: CONTENTMAP
+		});
+	},
+
 	onMusicTypeSubmit: function(lookup){
 
 		console.log("SUBMITTED FORM: ", lookup);
@@ -80,6 +86,7 @@ var App = React.createClass({
 
     addPlaylistToSpotify: function(){
         console.log(this.state.songList);
+        var that = this;
         var songs = this.state.songList.map(function(elem){
             console.log(elem);
             if( elem.tracks[0] == undefined){
@@ -94,6 +101,8 @@ var App = React.createClass({
             data: {songs: songs},
             success: function(data){
                 console.log("Success!");
+                alert('Added Playlist to Spotify! Another Route?');
+                that.setState({content: CONTENTMAP});
             },
 			error: function(xhr, status, err){
 				console.error(this.props.url, status, err.toString());
@@ -113,8 +122,7 @@ var App = React.createClass({
 						<MapBox
 							mapService = {this.props.mapService}
 							goToMusic = {this.goToMusic}
-							url="/api/setDuration"
-						/>
+							url="/api/setDuration"/>
 					)
 					break;
 				case CONTENTMUSIC:
@@ -127,7 +135,8 @@ var App = React.createClass({
 					content = (
 						<PlaylistBox
                             addToSpotify={this.addPlaylistToSpotify}
-                            songList={this.state.songList}/>
+                            songList={this.state.songList}
+                            toMap={this.toMap}/>
 					)
 					break;
 			}
