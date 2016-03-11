@@ -39,22 +39,37 @@ var Song = React.createClass({
     getInitialState: function(){
         return {
             play: false,
-            data: undefined
+            data: undefined,
+            play_object: {}
         }
     },
+
     onClick: function(){
-        $.ajax({
-            url: '/api/thirtySecondSample',
-            dataType: 'json',
-            type: 'GET',
-            data: {id: this.props.song.id},
-            success: function(data){
-                this.setState({data: data});
-            }.bind(this),
-			error: function(xhr, status, err) {
-				console.log("ERROR: " + err);
-			}
-        });
+        if( this.state.play == true ){
+            this.state.play_object.pause();
+            this.setState({play: false});
+        } else {
+            if( this.state.data == undefined ){
+                $.ajax({
+                    url: '/api/thirtySecondSample',
+                    dataType: 'json',
+                    type: 'GET',
+                    data: {id: this.props.song.tracks[0].foreign_id},
+                    success: function(data){
+                        var audio = new Audio(data.preview_url);
+                        console.log(audio);
+                        audio.play();
+                        this.setState({data: data, play_object: audio, play: true});
+                    }.bind(this),
+                    error: function(xhr, status, err) {
+                        console.log("ERROR: " + err.error.error);
+                    }
+                });
+            } else {
+                this.state.play_object.play();
+                this.setState({play: true});
+            }
+        }
     },
     render: function(){
     	console.log("Props: ", this.props);
