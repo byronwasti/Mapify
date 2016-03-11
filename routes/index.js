@@ -1,7 +1,6 @@
 var rp = require('request-promise');
 var request = require('request');
 var async = require('async');
-var auth = require('../auth');
 var echonest_search = require('./echonest');
 
 module.exports = function(){
