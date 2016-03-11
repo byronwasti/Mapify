@@ -5,7 +5,7 @@ var auth = require('../auth');
 
 var filterByTime = function(req, songs){
     // REMOVE THIS LINE
-    var tmp_LONG_TIME = 1233;
+    var tmp_LONG_TIME = 2233;
     var total_time = 0;
     var output = [];
     console.log(songs.length);
@@ -41,7 +41,7 @@ module.exports = function(req, res){
         method: 'GET',
         uri: 'http://developer.echonest.com/api/v4/artist/similar',
         qs: {
-            api_key: auth.ECHONEST_API_KEY,
+            api_key: process.env.ECHONEST_API_KEY || auth.ECHONEST_API_KEY,
             name: req.query.input,
             results: 30
         },
@@ -56,11 +56,14 @@ module.exports = function(req, res){
                 method: 'GET',
                 uri: 'http://developer.echonest.com/api/v4/song/search',
                 qs: {
-                    api_key: auth.ECHONEST_API_KEY,
+                    api_key: process.env.ECHONEST_API_KEY || auth.ECHONEST_API_KEY,
                     artist_id: elem.id,
                     results: 30,
-                    bucket: 'audio_summary'
+                    bucket: ['audio_summary','id:spotify', 'tracks']
+                    //bucket: 'id:spotify'
+                    //bucket: 'id:spotify'
                 },
+                useQuerystring: true,
                 json: true
             }
         });
@@ -69,23 +72,26 @@ module.exports = function(req, res){
             method: 'GET',
             uri: 'http://developer.echonest.com/api/v4/song/search',
             qs: {
-                api_key: auth.ECHONEST_API_KEY,
+                api_key: process.env.ECHONEST_API_KEY || auth.ECHONEST_API_KEY,
                 artist: req.query.input,
                 results: 30,
                 bucket: 'audio_summary'
+                //bucket: 'id:spotify'
             },
             json: true
         });
 
         async.map(ids, request, function(err, result){
             if( err ){
-                console.error(err);
+                console.error(err.error.error);
                 res.json(err);
             }
 
             output = result.reduce(function(prev, cur){
                 return prev.concat(cur.body.response.songs);
             }, []);
+
+            //res.json(output);
 
             time_sensitive_output = filterByTime(req, output);
 
