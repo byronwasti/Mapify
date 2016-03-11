@@ -5,7 +5,7 @@ var auth = require('../auth');
 
 var filterByTime = function(req, songs){
     // REMOVE THIS LINE
-    var tmp_LONG_TIME = 1233;
+    var tmp_LONG_TIME = 2233;
     var total_time = 0;
     var output = [];
     console.log(songs.length);

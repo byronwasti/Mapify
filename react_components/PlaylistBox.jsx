@@ -6,9 +6,9 @@ var PlaylistBox = React.createClass({
 		return (
 			<div className="playlist-container">
 				<h1 className="playlist-header">Your Custom Playlist:</h1>
-				<AddButton />
 				<SongList
 				songList={this.props.songList}/>
+				<AddButton />
 			</div>
 		)
 	}

@@ -11,14 +11,38 @@
 }
 
 .song-list{
-
+	overflow-y: scroll;
+	overflow-x: hidden;
+	max-height: 65vh;
 }
+
+.song-list::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: $grey900;
+}
+
+.song-list::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: $grey900;
+}
+
+.song-list::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+
 
 .song {
 	display: flex;
 	flex-flow: row;
 	padding: 10px 2% 10px 2%;
-	font-size: 13px;
+	font-size: 20px;
 }
 
 .play-button {
@@ -46,4 +70,5 @@
 	border-radius: 2em;
 	font-size: 1em;
 	padding: 5px 5% 5px 5%;
+	margin-top: 10px
 }
