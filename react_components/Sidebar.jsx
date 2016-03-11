@@ -13,7 +13,9 @@ var Sidebar = React.createClass({
 		var playlistStyle = {};
 
 		var highlightStyle = {
-		  background: 'black',
+		  'background': '#616161',
+		  'border-radius': '1em',
+		  'padding-left': '10px'
 		};
 
 		switch(this.props.contentStatus){
