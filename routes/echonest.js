@@ -54,26 +54,25 @@ module.exports = function(req, res){
                 qs: {
                     api_key: process.env.ECHONEST_API_KEY || require('../auth').ECHONEST_API_KEY,
                     artist_id: elem.id,
-                    results: 30,
+                    results: 80,
                     bucket: ['audio_summary','id:spotify', 'tracks']
-                    //bucket: 'id:spotify'
-                    //bucket: 'id:spotify'
                 },
                 useQuerystring: true,
                 json: true
             }
         });
 
+        // Add the original artist as well
         ids.push( {
             method: 'GET',
             uri: 'http://developer.echonest.com/api/v4/song/search',
             qs: {
                 api_key: process.env.ECHONEST_API_KEY || require('../auth').ECHONEST_API_KEY,
                 artist: req.query.input,
-                results: 30,
-                bucket: 'audio_summary'
-                //bucket: 'id:spotify'
+                results: 80,
+                bucket: ['audio_summary','id:spotify', 'tracks']
             },
+            useQuerystring: true,
             json: true
         });
 
@@ -86,8 +85,6 @@ module.exports = function(req, res){
             output = result.reduce(function(prev, cur){
                 return prev.concat(cur.body.response.songs);
             }, []);
-
-            //res.json(output);
 
             time_sensitive_output = filterByTime(req, output);
 

@@ -1,3 +1,7 @@
+/*
+ * The main REACT file entry point
+ */
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 var GoogleMaps = require('google-maps');
@@ -16,6 +20,7 @@ var CONTENTMAP = 'map',
 
 var App = React.createClass({
 	componentWillMount: function(){
+        // Ensure authentication b/c it is a one-page app
 		this.checkLogin()
 	},
 
@@ -78,8 +83,9 @@ var App = React.createClass({
 				console.log("Data Back: ", data);
                 if(data.statusCode == 429){
                     alert("Sorry! Things broke because our API got overloaded. Please wait a minute and try again");
+                } else {
+                    this.setState({content: CONTENTPLAYLIST, songList: data});
                 }
-                this.setState({content: CONTENTPLAYLIST, songList: data});
 			}.bind(this),
 			error: function(xhr, status, err){
 				console.error(this.props.url, status, err.toString());
@@ -88,14 +94,12 @@ var App = React.createClass({
 	},
 
     addPlaylistToSpotify: function(){
-        console.log(this.state.songList);
         var that = this;
         var songs = this.state.songList.filter(function(elem){
             return elem.tracks[0] !== undefined;
         }).map(function(elem){
             if( elem.tracks[0] == undefined){
-                console.log('FUCKING ERROR');
-                console.log(elem);
+                console.log("This should not happen anymore...");
             } else {
                 return elem.tracks[0].foreign_id;
             }

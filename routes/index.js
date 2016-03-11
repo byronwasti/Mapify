@@ -44,22 +44,17 @@ module.exports = function(){
                 json: true
             })
             .then(function(result){
-                console.log(req.body);
                 songs = req.body['songs[]'];
-                console.log(songs);
                 if( typeof(songs.length) === typeof(Array) ){
                     songs = songs.filter(function(elem){
                         return elem.length == 36;
                     });
                 }
 
+                // Can only add 100 songs at a time...
                 if( Number(songs.length) > 100 ){
                     songs = songs.splice(0,99);
                 }
-
-                console.log(result.id);
-                console.log(songs);
-                console.log(songs.length);
 
                 return rp({
                     method: 'POST',
@@ -68,16 +63,10 @@ module.exports = function(){
                         Authorization: 'Bearer ' + req.user.accessToken,
                         'Content-Type': 'application/json'
                     },
-                    /*
-                    qs: {
-                        'uris': songs
-                    },
-                    */
                     body: {
                         uris: songs
                     },
                     json: true
-                    //useQuerystring: true,
                 });
             })
             .then(function(after){
@@ -91,7 +80,8 @@ module.exports = function(){
         },
 
         thirtySecondSample: function(req, res){
-            console.log(req.query);
+            // Get track sample from Spotify
+            
             var id = req.query.id.split(':')[2];
             rp({
                 method: 'GET',

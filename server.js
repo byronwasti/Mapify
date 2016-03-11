@@ -62,6 +62,8 @@ app.get('/auth/spotify',
   function(req, res){
 });
 
+
+// The API routes
 app.get('/api/lookupMusic', index.lookupMusic);
 app.get('/api/thirtySecondSample', index.thirtySecondSample)
 app.post('/api/playlist', index.spotifyPlaylist);
