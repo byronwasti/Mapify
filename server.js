@@ -25,6 +25,7 @@ app.use(bodyParser({limit: '50mb'}));
 app.use(cookieParser());
 
 if(isDeveloping) {
+    console.log("In Development Mode");
     const compiler = webpack(config);
     app.use(webpackMiddleware(compiler, 
      {
