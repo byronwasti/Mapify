@@ -59,8 +59,11 @@ module.exports = function(req, res){
                     api_key: auth.ECHONEST_API_KEY,
                     artist_id: elem.id,
                     results: 30,
-                    bucket: 'audio_summary'
+                    bucket: ['audio_summary','id:spotify', 'tracks']
+                    //bucket: 'id:spotify'
+                    //bucket: 'id:spotify'
                 },
+                useQuerystring: true,
                 json: true
             }
         });
@@ -73,19 +76,22 @@ module.exports = function(req, res){
                 artist: req.query.input,
                 results: 30,
                 bucket: 'audio_summary'
+                //bucket: 'id:spotify'
             },
             json: true
         });
 
         async.map(ids, request, function(err, result){
             if( err ){
-                console.error(err);
+                console.error(err.error.error);
                 res.json(err);
             }
 
             output = result.reduce(function(prev, cur){
                 return prev.concat(cur.body.response.songs);
             }, []);
+
+            //res.json(output);
 
             time_sensitive_output = filterByTime(req, output);
 

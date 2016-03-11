@@ -57,14 +57,11 @@ app.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedi
 app.get('/auth/spotify', 
   passport.authenticate('spotify', {scope: ['user-read-email','user-read-birthdate', 'user-read-private'], showDialog: true}),
   function(req, res){
-      console.log("autorization"+ req);
-    //req.session.spotifyUser = req.user;
-    // res.json({user: req.user});
 });
 
 app.get('/api/lookupMusic', index.lookupMusic);
+app.get('/api/thirtySecondSample', index.thirtySecondSample)
 app.post('/api/setDuration', index.setDuration);
-
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }

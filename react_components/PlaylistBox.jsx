@@ -36,13 +36,48 @@ var SongList = React.createClass({
 });
 
 var Song = React.createClass({
+    getInitialState: function(){
+        return {
+            play: false,
+            data: undefined,
+            play_object: {}
+        }
+    },
+
+    onClick: function(){
+        if( this.state.play == true ){
+            this.state.play_object.pause();
+            this.setState({play: false});
+        } else {
+            if( this.state.data == undefined ){
+                $.ajax({
+                    url: '/api/thirtySecondSample',
+                    dataType: 'json',
+                    type: 'GET',
+                    data: {id: this.props.song.tracks[0].foreign_id},
+                    success: function(data){
+                        var audio = new Audio(data.preview_url);
+                        console.log(audio);
+                        audio.play();
+                        this.setState({data: data, play_object: audio, play: true});
+                    }.bind(this),
+                    error: function(xhr, status, err) {
+                        console.log("ERROR: " + err.error.error);
+                    }
+                });
+            } else {
+                this.state.play_object.play();
+                this.setState({play: true});
+            }
+        }
+    },
     render: function(){
     	console.log("Props: ", this.props);
         return (
             <div className="song">
-            	<input className="play-button" type="button" value="Play"/>
-            	<p className="song-title">{this.props.song.title} -- </p>
-            	<p className="song-artist">{this.props.song.artist_name}</p>
+            	<input className="play-button" type="button" value="Play"  onClick={this.onClick}/>
+            	<p>{this.props.song.title}</p>
+            	<p>{this.props.song.artist_name}</p>
     		</div>
         );
     }
