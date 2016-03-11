@@ -64,6 +64,7 @@ app.get('/auth/spotify',
 app.get('/api/echonest', index.echonest);
 app.get('/api/spotify', index.spotify);
 app.get('/api/spotify2', index.spotify2);
+app.get('/api/spotify3', index.spotify3);
 app.get('/api/lookupMusic', index.lookupMusic);
 
 function ensureAuthenticated(req, res, next) {

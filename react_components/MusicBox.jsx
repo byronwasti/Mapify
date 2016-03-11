@@ -29,7 +29,7 @@ var MusicBox = React.createClass({
 	render: function(){
 		return (
 			<form className="musicbox-container" onSubmit={this.handleSubmit}>
-				<h1>I am a musicbox!</h1>
+				<h1>I am a musicbox2!</h1>
 				<input 
 					type="text" 
 					placeholder="enter your favorite artist" 
