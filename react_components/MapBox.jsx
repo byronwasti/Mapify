@@ -44,6 +44,7 @@ var MapBox = React.createClass({
 	    	data: data,
 	    	success: function(response){
 	    		console.log(response);
+	    		this.props.goToMusic();
 	    	}.bind(this),
 			error: function(xhr, status, err) {
 	        	console.error(this.props.url, status, err.toString());

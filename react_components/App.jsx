@@ -52,6 +52,12 @@ var App = React.createClass({
         });
 	},
 
+	goToMusic: function(){
+		this.setState({
+			content: CONTENTMUSIC
+		})
+	},
+
 	onMusicTypeSubmit: function(lookup){
 
 		console.log("SUBMITTED FORM: ", lookup);
@@ -81,6 +87,7 @@ var App = React.createClass({
 					content = (
 						<MapBox
 							mapService = {this.props.mapService}
+							goToMusic = {this.goToMusic}
 							url="/api/setDuration"
 						/>
 					)
