@@ -7,7 +7,7 @@ var filterByTime = function(req, songs){
     var total_time = 0;
     var output = [];
     
-    while( total_time < req.user.tripDuration ){
+    while( total_time < Number(req.user.tripDuration) ){
         if( songs.length < 1 ){
             return output;
         }
