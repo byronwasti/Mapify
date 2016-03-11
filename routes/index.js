@@ -20,7 +20,7 @@ module.exports = function(){
 		},
 
         setDuration: function(req, res){
-            req.session.tripDuration = req.body;
+            req.user.tripDuration = req.body;
             res.json({success: true});
         },
 
