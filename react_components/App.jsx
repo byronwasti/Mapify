@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var GoogleMaps = require('google-maps');
 
 var MapBox = require('./MapBox')
 var LoginBox = require('./LoginBox')
@@ -22,6 +23,7 @@ var App = React.createClass({
 		return {
 			loggedIn: false,
 			user: {user:{}},
+            songList: []
 		}
 	},
 
@@ -35,7 +37,7 @@ var App = React.createClass({
 					this.setState({
 						user: data.user,
 						loggedIn: true,
-						content: CONTENTMUSIC
+						content: CONTENTMAP
 					});
 				} else {
 					this.setState({
@@ -51,6 +53,12 @@ var App = React.createClass({
         });
 	},
 
+	goToMusic: function(){
+		this.setState({
+			content: CONTENTMUSIC
+		})
+	},
+
 	onMusicTypeSubmit: function(lookup){
 
 		console.log("SUBMITTED FORM: ", lookup);
@@ -62,12 +70,16 @@ var App = React.createClass({
 			data: lookup,
 			success: function(data){
 				console.log("Data Back: ", data);
+                this.setState({content: CONTENTPLAYLIST, songList: data});
 			}.bind(this),
 			error: function(xhr, status, err){
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
 		});
 	},
+
+    addPlaylistToSpotify: function(){
+    },
 
 	render: function(){
 
@@ -78,7 +90,11 @@ var App = React.createClass({
 			switch(this.state.content){
 				case CONTENTMAP:
 					content = (
-						<MapBox/>
+						<MapBox
+							mapService = {this.props.mapService}
+							goToMusic = {this.goToMusic}
+							url="/api/setDuration"
+						/>
 					)
 					break;
 				case CONTENTMUSIC:
@@ -89,7 +105,9 @@ var App = React.createClass({
 					break;
 				case CONTENTPLAYLIST:
 					content = (
-						<PlaylistBox/>
+						<PlaylistBox
+                            addToSpotify={this.addPlaylistToSpotify}
+                            songList={this.state.songList}/>
 					)
 					break;
 			}
@@ -115,7 +133,7 @@ var App = React.createClass({
 	}
 });
 
-ReactDOM.render(
-	<App />,
-	document.getElementById('content')
-);
+GoogleMaps.LIBRARIES = ['places'];
+GoogleMaps.load(function (google) {
+    ReactDOM.render(<App mapService={google}/>, document.getElementById('content'));
+});

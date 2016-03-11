@@ -1,5 +1,8 @@
 var rp = require('request-promise');
+var request = require('request');
+var async = require('async');
 var auth = require('../auth');
+var echonest_search = require('./echonest');
 
 module.exports = function(){
 	return {
@@ -16,6 +19,11 @@ module.exports = function(){
 			req.logout();
 			res.redirect('/')
 		},
+
+        setDuration: function(req, res){
+            req.session.tripDuration = req.body;
+            res.json({success: true});
+        },
 
         echonest: function(req,res){
             rp({
@@ -69,30 +77,8 @@ module.exports = function(){
         },
 
         lookupMusic: function(req, res){
-            rp({
-                method: 'GET',
-                uri: 'https://api.spotify.com/v1/search',
-                qs: {
-                    q: req.query.input,
-                    type: req.query.type
-                },
-                json: true
-            })
-            .then(function(songs){
-                artist_id = songs.artists.items[0].id;
-                return rp({
-                    method: 'GET',
-                    uri: 'https://api.spotify.com/v1/artists/'+artist_id+'/related-artists',
-                    json: true
-                })
-            })
-            .then(function(songs){
-                res.json(songs);
-            })
-            .catch(function(err){
-                console.log(err);
-                console.error("THERE WAS A FUCKING ERROR!");
-            });
+            echonest_search(req, res);
         }
+
 	}
 }

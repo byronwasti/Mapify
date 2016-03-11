@@ -1,0 +1,49 @@
+@import 'global';
+
+.playlist-container {
+	text-align: center;
+	width: 100%;
+}
+
+.playlist-header{
+
+	
+}
+
+.song-list{
+
+}
+
+.song {
+	display: flex;
+	flex-flow: row;
+	padding: 10px 2% 10px 2%;
+	font-size: 13px;
+}
+
+.play-button {
+	border: none;
+	background-color: $grey900;
+	border: solid 1px $green600;
+	border-radius: 2em;
+	color: $white;
+	margin-right: 20px;
+
+}
+
+.song-title{
+
+}
+
+.song-artist{
+	padding-left: 5px;
+}
+
+.add-button {
+	border: none;
+	background-color: $green600;
+	color: $white;
+	border-radius: 2em;
+	font-size: 1em;
+	padding: 5px 5% 5px 5%;
+}
