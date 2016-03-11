@@ -1,11 +1,10 @@
 var SpotifyStrategy = require('passport-spotify').Strategy;
-var auth = require('../auth');
 
 module.exports = function(passport){
 
-	var clientID = process.env.SPOTIFY_CLIENT_ID || auth.SPOTIFY_CLIENT_ID;
-	var clientSecret = process.env.SPOTIFY_CLIENT_SECRET || auth.SPOTIFY_CLIENT_SECRET;
-	var callbackURL = process.env.SPOTIFY_CALLBACK_URL || auth.SPOTIFY_CALLBACK_URL;
+	var clientID = process.env.SPOTIFY_CLIENT_ID || require('../auth').SPOTIFY_CLIENT_ID;
+	var clientSecret = process.env.SPOTIFY_CLIENT_SECRET || require('../auth').SPOTIFY_CLIENT_SECRET;
+	var callbackURL = process.env.SPOTIFY_CALLBACK_URL || require('../auth').SPOTIFY_CALLBACK_URL;
 
  	passport.serializeUser(function(user, done) {
       done(null, user);
