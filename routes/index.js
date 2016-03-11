@@ -1,5 +1,9 @@
 var rp = require('request-promise');
+var request = require('request');
+var async = require('async');
 var auth = require('../auth');
+var spotify_search = require('./spotify');
+var echonest_search = require('./echonest');
 
 module.exports = function(){
 	return {
@@ -68,6 +72,12 @@ module.exports = function(){
             });
         },
 
+        spotify3: function(req, res){
+            //spotify_search(req, res);
+            echonest_search(req, res);
+
+        },
+
         lookupMusic: function(req, res){
             rp({
                 method: 'GET',
@@ -86,11 +96,29 @@ module.exports = function(){
                     json: true
                 })
             })
+            .then(function(artists){
+                artists_id = artists.artists.map(function(artist){
+                    return artist.id;
+                });
+                artists_id = artists_id.reduce(function(prev, cur){
+                });
+                return rp({
+                    method: 'GET',
+                    uri: 'https://api.spotify.com/v1/artists/',
+                    qs: {
+                        ids: artists_id
+                    },
+                    json: true
+                });
+                //res.json(songs);
+            })
             .then(function(songs){
+                //console.log(songs);
                 res.json(songs);
             })
             .catch(function(err){
-                console.log(err);
+                console.log(Object.keys(err));
+                console.log(err.error);
                 console.error("THERE WAS A FUCKING ERROR!");
             });
         }

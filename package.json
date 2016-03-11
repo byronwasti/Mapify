@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/byronwasti/Mapify#readme",
   "devDependencies": {
+    "async": "^1.5.2",
+    "async-q": "^0.3.1",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.6.5",
     "babel-loader": "^6.2.4",
@@ -43,6 +45,7 @@
     "postcss-loader": "^0.8.1",
     "precss": "^1.4.0",
     "react-dom": "^0.14.7",
+    "request": "^2.69.0",
     "request-promise": "^2.0.1",
     "sass-loader": "^3.1.2",
     "serve-favicon": "^2.3.0",

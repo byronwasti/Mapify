@@ -11,4 +11,15 @@ var PlaylistBox = React.createClass({
 	}
 });
 
+var Song = React.createClass({
+    render: function(){
+        return (
+                <div>
+    <p> {this.props.song.title} <br/>
+     --{this.props.song.artist_name} </p>
+    </div>
+               );
+    }
+});
+
 module.exports = PlaylistBox;
