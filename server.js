@@ -65,6 +65,7 @@ app.get('/api/echonest', index.echonest);
 app.get('/api/spotify', index.spotify);
 app.get('/api/spotify2', index.spotify2);
 app.get('/api/lookupMusic', index.lookupMusic);
+app.post('/api/setDuration', index.setDuration);
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
