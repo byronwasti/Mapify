@@ -6,6 +6,7 @@ var PlaylistBox = React.createClass({
 		return (
 			<div className="playlist-container">
 				<h1 className="playlist-header">Your Custom Playlist:</h1>
+				<AddButton />
 				<SongList
 				songList={this.props.songList}/>
 			</div>
@@ -39,12 +40,23 @@ var Song = React.createClass({
     	console.log("Props: ", this.props);
         return (
             <div className="song">
-            	<input type="button" value="Play"/>
-            	<p>{this.props.song.title}</p>
-            	<p>{this.props.song.artist_name}</p>
+            	<input className="play-button" type="button" value="Play"/>
+            	<p className="song-title">{this.props.song.title} -- </p>
+            	<p className="song-artist">{this.props.song.artist_name}</p>
     		</div>
         );
     }
+});
+
+var AddButton = React.createClass({
+	render: function(){
+		return (
+			<input 
+			type="button"
+			value="ADD PLAYLIST TO SPOTIFY"
+			className="add-button"/>
+		);
+	}
 });
 
 module.exports = PlaylistBox;
