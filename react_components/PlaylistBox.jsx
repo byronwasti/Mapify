@@ -11,6 +11,7 @@ var PlaylistBox = React.createClass({
                     />
 				<SongList
 				songList={this.props.songList}/>
+				<AddButton />
 			</div>
 		)
 	}

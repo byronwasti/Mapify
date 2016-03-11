@@ -5,7 +5,7 @@ var auth = require('../auth');
 
 var filterByTime = function(req, songs){
     // REMOVE THIS LINE
-    var tmp_LONG_TIME = 1233;
+    var tmp_LONG_TIME = 2233;
     var total_time = 0;
     var output = [];
     console.log(songs.length);
@@ -41,7 +41,7 @@ module.exports = function(req, res){
         method: 'GET',
         uri: 'http://developer.echonest.com/api/v4/artist/similar',
         qs: {
-            api_key: auth.ECHONEST_API_KEY,
+            api_key: process.env.ECHONEST_API_KEY || auth.ECHONEST_API_KEY,
             name: req.query.input,
             results: 30
         },
@@ -56,7 +56,7 @@ module.exports = function(req, res){
                 method: 'GET',
                 uri: 'http://developer.echonest.com/api/v4/song/search',
                 qs: {
-                    api_key: auth.ECHONEST_API_KEY,
+                    api_key: process.env.ECHONEST_API_KEY || auth.ECHONEST_API_KEY,
                     artist_id: elem.id,
                     results: 30,
                     bucket: ['audio_summary','id:spotify', 'tracks']
@@ -72,7 +72,7 @@ module.exports = function(req, res){
             method: 'GET',
             uri: 'http://developer.echonest.com/api/v4/song/search',
             qs: {
-                api_key: auth.ECHONEST_API_KEY,
+                api_key: process.env.ECHONEST_API_KEY || auth.ECHONEST_API_KEY,
                 artist: req.query.input,
                 results: 30,
                 bucket: 'audio_summary'

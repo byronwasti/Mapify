@@ -20,8 +20,9 @@ module.exports = function(){
 			res.redirect('/')
 		},
 
-        sendDuration: function(req, res){
-            
+        setDuration: function(req, res){
+            req.session.tripDuration = req.body;
+            res.json({success: true});
         },
 
         lookupMusic: function(req, res){

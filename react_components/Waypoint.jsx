@@ -91,8 +91,8 @@ var WayPoint = React.createClass({
         } else {
             element = (<ViewWayPoint
             name={waypoint.name}
-            onAction={this.props.onAction}
-            />);
+            onAction={this.props.onAction}/>
+        );
         }
         return (
             <div className='way-point'>

@@ -37,8 +37,7 @@ var App = React.createClass({
 					this.setState({
 						user: data.user,
 						loggedIn: true,
-						//content: CONTENTMAP
-						content: CONTENTMUSIC
+						content: CONTENTMAP
 					});
 				} else {
 					this.setState({
@@ -52,6 +51,12 @@ var App = React.createClass({
 				console.log("ERROR: " + err);
 			}.bind(this)
         });
+	},
+
+	goToMusic: function(){
+		this.setState({
+			content: CONTENTMUSIC
+		})
 	},
 
 	onMusicTypeSubmit: function(lookup){
@@ -107,7 +112,9 @@ var App = React.createClass({
 					content = (
 						<MapBox
 							mapService = {this.props.mapService}
-							url="/setDuration"/>
+							goToMusic = {this.goToMusic}
+							url="/api/setDuration"
+						/>
 					)
 					break;
 				case CONTENTMUSIC:

@@ -33,14 +33,18 @@ var MapBox = React.createClass({
 	},
 
 	submitRoute: function(){
-		console.log("Submitting Route")
+		var data = {
+			duration: this.state.route.stats.duration.value
+		}
+
  		$.ajax({
 	    	url: this.props.url,
 	    	type: 'POST',
 	    	dataType: 'json',
-	    	data: this.state.route.stats.duration.value,
+	    	data: data,
 	    	success: function(response){
 	    		console.log(response);
+	    		this.props.goToMusic();
 	    	}.bind(this),
 			error: function(xhr, status, err) {
 	        	console.error(this.props.url, status, err.toString());
