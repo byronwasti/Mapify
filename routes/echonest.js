@@ -3,17 +3,10 @@ var request = require('request');
 var async = require('async');
 
 var filterByTime = function(req, songs){
-    // REMOVE THIS LINE
-    var duration = req.session.duration;
-
-    console.log("DURATION")
-    console.log(duration)
     var total_time = 0;
     var output = [];
-    console.log(songs.length);
-    debugger;
     
-    while( total_time < duration ){
+    while( total_time < req.user.tripDuration ){
         if( songs.length < 1 ){
             return output;
         }
