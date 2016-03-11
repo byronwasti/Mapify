@@ -22,7 +22,22 @@ module.exports = function(){
 
         lookupMusic: function(req, res){
             echonest_search(req, res);
-        }
+        },
 
+        thirtySecondSample: function(req, res){
+            rp({
+                method: 'GET',
+                uri: 'https://api.spotify.com/v1/tracks/'+req.query.id,
+                json: true
+            })
+            .then(function(result){
+                res.json(result);
+            })
+            .catch(function(err){
+                console.error(err);
+                res.json(err);
+            });
+
+        }
 	}
 }
