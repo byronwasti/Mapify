@@ -41,7 +41,6 @@ module.exports = function(){
                 console.error(err);
                 res.json(err);
             });
-
         }
 	}
 }
