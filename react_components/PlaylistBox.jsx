@@ -6,12 +6,9 @@ var PlaylistBox = React.createClass({
 		return (
 			<div className="playlist-container">
 				<h1 className="playlist-header">Your Custom Playlist:</h1>
-				<AddButton 
-                    onClick={this.props.addToSpotify}
-                    />
 				<SongList
 				songList={this.props.songList}/>
-				<AddButton />
+				<AddButton onClick={this.props.addToSpotify}/>
 			</div>
 		)
 	}
@@ -79,7 +76,7 @@ var Song = React.createClass({
         return (
             <div className="song">
             	<input className="play-button" type="button" value="Play"  onClick={this.onClick}/>
-            	<p>{this.props.song.title}</p>
+            	<p>{this.props.song.title} -- </p>
             	<p>{this.props.song.artist_name}</p>
     		</div>
         );
