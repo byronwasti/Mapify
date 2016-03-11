@@ -32,6 +32,22 @@ var MapBox = React.createClass({
 		}
 	},
 
+	submitRoute: function(){
+		console.log("Submitting Route")
+ 		$.ajax({
+	    	url: this.props.url,
+	    	type: 'POST',
+	    	dataType: 'json',
+	    	data: this.state.route.stats.duration.value,
+	    	success: function(response){
+	    		console.log(response);
+	    	}.bind(this),
+			error: function(xhr, status, err) {
+	        	console.error(this.props.url, status, err.toString());
+	      	}.bind(this)
+    	});
+	},
+
 	updateRouteStats: function(newStats){
 		var route = this.state.route;
 		route.stats = newStats;
@@ -59,6 +75,7 @@ var MapBox = React.createClass({
 					updateWaypoints={this.updateWaypoints}
 					mapService={this.props.mapService}
 					route={this.state.route}
+					onSubmitRoute={this.submitRoute}
 				/>
 				<Map
 					mapService = {this.props.mapService}

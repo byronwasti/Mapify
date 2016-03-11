@@ -81,6 +81,7 @@ var App = React.createClass({
 					content = (
 						<MapBox
 							mapService = {this.props.mapService}
+							url="/setDuration"
 						/>
 					)
 					break;

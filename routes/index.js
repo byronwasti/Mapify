@@ -17,6 +17,10 @@ module.exports = function(){
 			res.redirect('/')
 		},
 
+        sendDuration: function(req, res){
+            
+        },
+
         echonest: function(req,res){
             rp({
                 method: 'GET',
