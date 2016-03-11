@@ -14,6 +14,8 @@ var passport = require('passport');
 var login = require('./routes/login')(passport)
 var index = require('./routes/index')();
 
+var isDeveloping = process.env.NODE_ENV !== 'production';
+
 var app = express();
 
 app.use(logger('dev'));
@@ -21,22 +23,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false}));
 app.use(cookieParser());
 
-const compiler = webpack(config);
-app.use(webpackMiddleware(compiler, 
- {
-    stats: {
-        colors: true,
-        hash: false,
-        timings: true,
-        chunks: false,
-        chunkModules: false,
-        modules: false
+if(isDeveloping) {
+    const compiler = webpack(config);
+    app.use(webpackMiddleware(compiler, 
+     {
+        stats: {
+            colors: true,
+            hash: false,
+            timings: true,
+            chunks: false,
+            chunkModules: false,
+            modules: false
+        }
     }
+    ));
+    app.use(webpackHotMiddleware(compiler, {
+        log: console.log, path: '/__webpack_hmr', heartbeat: 10*1000
+    }));
 }
-));
-app.use(webpackHotMiddleware(compiler, {
-    log: console.log, path: '/__webpack_hmr', heartbeat: 10*1000
-}));
 
 app.use(express.static(path.join(__dirname, '/public')));  
 
