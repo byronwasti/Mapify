@@ -6,7 +6,9 @@ var PlaylistBox = React.createClass({
 		return (
 			<div className="playlist-container">
 				<h1 className="playlist-header">Your Custom Playlist:</h1>
-				<AddButton />
+				<AddButton 
+                    onClick={this.props.addToSpotify}
+                    />
 				<SongList
 				songList={this.props.songList}/>
 			</div>
@@ -87,6 +89,7 @@ var AddButton = React.createClass({
 	render: function(){
 		return (
 			<input 
+            onClick={this.props.onClick}
 			type="button"
 			value="ADD PLAYLIST TO SPOTIFY"
 			className="add-button"/>

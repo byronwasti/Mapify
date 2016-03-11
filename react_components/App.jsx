@@ -74,6 +74,26 @@ var App = React.createClass({
 	},
 
     addPlaylistToSpotify: function(){
+        console.log(this.state.songList);
+        var songs = this.state.songList.map(function(elem){
+            console.log(elem);
+            if( elem.tracks[0] == undefined){
+            } else {
+                return elem.tracks[0].foreign_id;
+            }
+        });
+        $.ajax({
+            url: '/api/playlist',
+            dataType: 'json',
+            type: 'POST',
+            data: {songs: songs},
+            success: function(data){
+                console.log("Success!");
+            },
+			error: function(xhr, status, err){
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+        });
     },
 
 	render: function(){

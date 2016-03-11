@@ -28,6 +28,56 @@ module.exports = function(){
             echonest_search(req, res);
         },
 
+        spotifyPlaylist: function(req, res){
+            var id = req.user.id;
+            var spotify_auth = 'Bearer '+req.user.accessToken;
+            rp({
+                method: 'POST',
+                uri: 'https://api.spotify.com/v1/users/'+id+'/playlists',
+                body: {
+                    name: 'Mapify'+Math.floor(Math.random()*10+1)
+                },
+                headers: {
+                    Authorization:  spotify_auth,
+                    'Content-Type': 'application/json'
+                },
+                json: true
+            })
+            .then(function(result){
+                console.log(req.body);
+                songs = req.body['songs[]'];
+                console.log(songs);
+
+                if( songs.length > 100 ){
+                    songs.splice(0,99);
+                }
+
+                console.log(result.id);
+                songs = songs.reduce(function(prev, cur){
+                    return prev + ','+cur;
+                });
+                return rp({
+                    method: 'POST',
+                    uri: 'https://api.spotify.com/v1/users/'+req.user.id+'/playlists/'+result.id+'/tracks',
+                    headers: {
+                        Authorization: 'Bearer ' + req.user.accessToken,
+                        'Content-Type': 'application/json'
+                    },
+                    qs: {
+                        'uris': songs
+                    },
+                    useQuerystring: true,
+                });
+            })
+            .then(function(after){
+                res.json({});
+            })
+            .catch(function(err){
+                console.error(err);
+                console.error(err.error.error);
+            });
+        },
+
         thirtySecondSample: function(req, res){
             console.log(req.query);
             var id = req.query.id.split(':')[2];
