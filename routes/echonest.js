@@ -5,8 +5,9 @@ var async = require('async');
 var filterByTime = function(req, songs){
     var total_time = 0;
     var output = [];
+    var tripDur = Number(req.user.tripDuration.duration);
     
-    while( total_time < Number(req.user.tripDuration) ){
+    while( total_time < tripDur ){
         if( songs.length < 1 ){
             return output;
         }
