@@ -7,17 +7,41 @@ var MapBox = React.createClass({
 
 	getInitialState: function(){
 		return {
-			waypoints: {
-				'Origin': '',
-				'Destination': ''
+			route:{
+				waypoints:[
+					{
+						name: 'Oakland, CA',
+			            placeId: '',
+            			placeDetails: ''
+					},
+					{
+						name: 'Needham, MA',
+						placeId: '',
+						placeDetails:''
+					}
+				],
 			}
 		}
 	},
 
-	updateWaypoints: function(newWaypoints){
+	updateRouteStats: function(newStats){
+		var route = this.state.route;
+		route.stats = newStats;
+
 		this.setState({
-			waypoints: newWaypoints
+			route: route
 		})
+	},
+
+	updateWaypoints: function(newWaypoints){
+
+		var route = this.state.route;
+
+		route.waypoints = newWaypoints;
+
+		this.setState({
+			route: route
+		});
 	},
 
 	render: function(){
@@ -25,10 +49,13 @@ var MapBox = React.createClass({
 			<div className = "mapbox-container">
 				<TripPlanner
 					updateWaypoints={this.updateWaypoints}
+					mapService={this.props.mapService}
+					route={this.state.route}
 				/>
 				<Map
 					mapService = {this.props.mapService}
-					waypoints = {this.state.waypoints}
+					route = {this.state.route}
+					updateRouteStats = {this.updateRouteStats}
 				/>
 			</div>
 		)

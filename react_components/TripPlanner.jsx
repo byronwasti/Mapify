@@ -1,55 +1,81 @@
 var React = require("react");
+var Waypoint = require("./Waypoint")
 
 var TripPlanner = React.createClass({
 
 	getInitialState: function(){
 		return {
-			'Origin':'',
-			'Destination':''
+            editingAt: -1,
+            selected: -1
 		}
 	},
 
-	onComplete: function(){
-		this.props.updateWaypoints(this.state)
-	},
+	onWaypointAction: function(index, action, options){
+        switch (action) {
+            case 'edit':
+                this.editWayPoint(index);
+                break;
+            case 'save':
+                this.saveWayPoint(index, options);
+                break;
+            case 'select':
+                this.selectWayPoint(index);
+                break;
+        }
+    },
 
-	onWaypointChange: function(e){
-		var state = {};
-		state[e.target.placeholder] = e.target.value;
-		this.setState(state)
-	},
+    editWayPoint: function (index) {
+        this.setState({
+            editingAt: index
+        });
+    },
+
+    saveWayPoint: function (index, options) {
+        var wayPoints = this.props.route.waypoints,
+            placeDetails = options.placeDetails || {};
+        wayPoints[index] = {
+            name: options.value,
+            placeId: placeDetails.place_id,
+            placeDetails: placeDetails
+        };
+
+        this.props.updateWaypoints(wayPoints)
+        this.setState({
+            editingAt: -1
+        });
+    },
+
+    selectWayPoint: function (index) {
+        this.setState({
+            selected: index
+        })
+    },
 
 	render: function(){
+		var origin = this.props.route.waypoints[0]
+		var destination = this.props.route.waypoints[1]
 		return (
-			<div>
-				<WaypointInput
-					type='Origin'
-					onWaypointChange={this.onWaypointChange}
-					onComplete={this.onComplete}
-				/>
-				<WaypointInput
-					type='Destination'
-					onWaypointChange={this.onWaypointChange}
-					onComplete={this.onComplete}
-				/>
+			<div className = "waypoints-container">
+				<Waypoint
+                    index={0}
+                    mapService={this.props.mapService}
+                    waypoint={origin}
+                    editing={this.state.editingAt === 0}
+                    selected={this.state.selected === 0}
+                    onAction={this.onWaypointAction.bind(this, 0)}
+                />
+
+				<Waypoint
+                    index={1}
+                    mapService={this.props.mapService}
+                    waypoint={destination}
+                    editing={this.state.editingAt === 1}
+                    selected={this.state.selected === 1}
+                    onAction={this.onWaypointAction.bind(this, 1)}
+                />
 			</div>
 		)
 	}
 });
-
-var WaypointInput = React.createClass({
-
-
-	render: function(){
-		return(
-			<input 
-				type="text" 
-				placeholder={this.props.type} 
-				onChange={this.props.onWaypointChange} 
-				onBlur={this.props.onComplete}
-			/>
-		)
-	}
-})
 
 module.exports = TripPlanner;
