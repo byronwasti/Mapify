@@ -61,6 +61,7 @@
     "classnames": "^2.2.3",
     "expose-loader": "^0.7.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "google-maps": "^3.2.1",
     "postcss": "^5.0.19",
     "react": "^0.14.7",
