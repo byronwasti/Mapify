@@ -61,7 +61,7 @@ app.get('/auth/spotify',
 
 app.get('/api/lookupMusic', index.lookupMusic);
 app.get('/api/thirtySecondSample', index.thirtySecondSample)
-
+app.post('/api/setDuration', index.setDuration);
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
