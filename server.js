@@ -75,7 +75,7 @@ app.post('/api/setDuration', index.setDuration);
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
+  res.redirect('/');
 }
 
 var PORT = process.env.PORT || 3000;
