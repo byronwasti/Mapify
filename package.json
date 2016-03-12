@@ -4,6 +4,8 @@
   "description": "Create a unique playlist for every trip",
   "main": "server.js",
   "scripts": {
+    "postinstall": "webpack --config ./webpack.config.production.js --progress --colors",
+    "start": "node server.js",
     "test": "echo 'still needs to be implemented'",
     "build": "set NODE_ENV=production && webpack --config ./webpack.config.production.js --progress --profile --colors"
   },
