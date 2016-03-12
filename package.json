@@ -33,6 +33,7 @@
     "classnames": "^2.2.3",
     "cookie-parser": "^1.4.1",
     "css-loader": "^0.23.1",
+    "expose": "^0.1.4",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "google-maps": "^3.2.1",
