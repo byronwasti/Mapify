@@ -1,6 +1,7 @@
 var path = require('path');
 var autoprefixer = require('autoprefixer');
 var precss       = require('precss');
+var webpack = require('webpack');
 
 module.exports = {
     entry: './react_components/App.jsx',
@@ -36,4 +37,13 @@ module.exports = {
     postcss: function () {
         return [autoprefixer, precss];
     },
+    plugins: [
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            compress: {
+                warnings: false
+            }
+        })
+    ]
 };
