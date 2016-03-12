@@ -6,8 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var webpack = require('webpack');
-var webpackMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config.js');
 var SpotifyStrategy = require('passport-spotify').Strategy;
 var passport = require('passport');
@@ -25,6 +23,9 @@ app.use(bodyParser({limit: '50mb'}));
 app.use(cookieParser());
 
 if(isDeveloping) {
+    var webpackMiddleware = require('webpack-dev-middleware');
+    var webpackHotMiddleware = require('webpack-hot-middleware');
+
     console.log("In Development Mode");
     const compiler = webpack(config);
     app.use(webpackMiddleware(compiler, 
