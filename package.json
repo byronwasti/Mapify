@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Create a unique playlist for every trip",
   "main": "server.js",
+  "engines": {
+      "node": "5.7.0",
+      "npm": "3.7.5"
+  },
   "scripts": {
     "postinstall": "webpack --config ./webpack.config.production.js --progress --colors",
     "start": "node server.js",
