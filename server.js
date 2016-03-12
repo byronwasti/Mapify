@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false}));
 app.use(bodyParser({limit: '50mb'}));
 app.use(cookieParser());
+console.log("Beginning server!");
 
 if(isDeveloping) {
     var webpackMiddleware = require('webpack-dev-middleware');
