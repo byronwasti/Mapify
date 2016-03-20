@@ -23,6 +23,7 @@ app.use(bodyParser({limit: '50mb'}));
 app.use(cookieParser());
 console.log("Beginning server!");
 
+/*
 if(isDeveloping) {
     var webpackMiddleware = require('webpack-dev-middleware');
     var webpackHotMiddleware = require('webpack-hot-middleware');
@@ -45,6 +46,7 @@ if(isDeveloping) {
         log: console.log, path: '/__webpack_hmr', heartbeat: 10*1000
     }));
 }
+*/
 
 app.use(express.static(path.join(__dirname, '/public')));  
 
