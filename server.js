@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended:false}));
 app.use(bodyParser({limit: '50mb'}));
 app.use(cookieParser());
 
+// Ohhhh I see you 
 if(isDeveloping) {
     console.log("In Development Mode");
     const compiler = webpack(config);
@@ -71,6 +72,7 @@ app.get('/api/thirtySecondSample', index.thirtySecondSample)
 app.post('/api/playlist', index.spotifyPlaylist);
 app.post('/api/setDuration', index.setDuration);
 
+// Do you need this?
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
