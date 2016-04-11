@@ -72,6 +72,7 @@ var App = React.createClass({
 
 	onMusicTypeSubmit: function(lookup){
 
+		// Remove log statements from production and add more documentation of your work 
 		console.log("SUBMITTED FORM: ", lookup);
 
 		$.ajax({
