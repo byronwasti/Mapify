@@ -84,10 +84,13 @@ var WayPoint = React.createClass({
             element = null,
             markerClassNames = classNames('marker icon-adjust', {selected: this.props.selected})
         if (editing) {
-            element = (<EditWayPoint
-            mapService={this.props.mapService}
-            name={waypoint.name}
-            onAction={this.props.onAction} />);
+            element = (
+                <EditWayPoint
+                    mapService={this.props.mapService}
+                    name={waypoint.name}
+                    onAction={this.props.onAction}
+                 />
+            );
         } else {
             element = (<ViewWayPoint
             name={waypoint.name}

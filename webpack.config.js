@@ -1,3 +1,4 @@
+// God I am so glad you guys did this, webpack is the bombdigity
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');

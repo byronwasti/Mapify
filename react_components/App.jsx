@@ -32,6 +32,7 @@ var App = React.createClass({
 		}
 	},
 
+    //react router might have been a less janky solution here
 	checkLogin: function(){
         $.ajax({
 			url: '/verifyLogin',
@@ -72,6 +73,7 @@ var App = React.createClass({
 
 	onMusicTypeSubmit: function(lookup){
 
+        //should probably remove logging statements from production, webpack.config.production would be an easy way to do this
 		console.log("SUBMITTED FORM: ", lookup);
 
 		$.ajax({
@@ -143,7 +145,7 @@ var App = React.createClass({
 					break;
 				case CONTENTMUSIC:
 					content = (
-						<MusicBox 
+						<MusicBox
 							onMusicTypeSubmit={this.onMusicTypeSubmit}/>
 					)
 					break;
@@ -162,7 +164,7 @@ var App = React.createClass({
 					<Navbar
 						username={this.state.user.displayName}/>
 					<div className="content-container">
-						<Sidebar 
+						<Sidebar
 							contentStatus={this.state.content}/>
 						{content}
 					</div>

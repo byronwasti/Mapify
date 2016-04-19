@@ -84,10 +84,10 @@ var TripPlanner = React.createClass({
 	                    onAction={this.onWaypointAction.bind(this, 1)}/>
 	            </div>
 
-	            <input 
+	            <input
 	            	className="submit-route-button"
-	            	type="button" 
-	            	onClick={this.props.onSubmitRoute} 
+	            	type="button"
+	            	onClick={this.props.onSubmitRoute}
 	            	value="Submit Route"/>
 			</div>
 		)

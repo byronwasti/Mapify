@@ -7,7 +7,8 @@ var PlaylistBox = React.createClass({
 			<div className="playlist-container">
 				<h1 className="playlist-header">Your Custom Playlist:</h1>
 				<SongList
-				songList={this.props.songList}/>
+                    songList={this.props.songList}
+                />
 				<AddButton onClick={this.props.addToSpotify}/>
 			</div>
 		)
@@ -19,9 +20,10 @@ var SongList = React.createClass({
 		var songNodes = this.props.songList.map(function(song, index){
 			if (song){
 				return (
-					<Song 
+					<Song
 						key={index}
-						song={song} />
+                        song={song}
+                    />
 				);
 			}
 		}, this);
@@ -55,6 +57,7 @@ var Song = React.createClass({
                     dataType: 'json',
                     type: 'GET',
                     data: {id: this.props.song.tracks[0].foreign_id},
+                    // you have es6, this is the exact use case for => functions
                     success: function(data){
                         var audio = new Audio(data.preview_url);
                         console.log(audio);
@@ -86,11 +89,12 @@ var Song = React.createClass({
 var AddButton = React.createClass({
 	render: function(){
 		return (
-			<input 
-            onClick={this.props.onClick}
-			type="button"
-			value="ADD PLAYLIST TO SPOTIFY"
-			className="add-button"/>
+			<input
+                onClick={this.props.onClick}
+                type="button"
+                value="ADD PLAYLIST TO SPOTIFY"
+                className="add-button"
+            />
 		);
 	}
 });

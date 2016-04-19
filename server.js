@@ -25,9 +25,10 @@ app.use(bodyParser({limit: '50mb'}));
 app.use(cookieParser());
 
 if(isDeveloping) {
+    //why is the tab size different in this chunk of the code?
     console.log("In Development Mode");
     const compiler = webpack(config);
-    app.use(webpackMiddleware(compiler, 
+    app.use(webpackMiddleware(compiler,
      {
         stats: {
             colors: true,
@@ -44,8 +45,9 @@ if(isDeveloping) {
     }));
 }
 
-app.use(express.static(path.join(__dirname, '/public')));  
+app.use(express.static(path.join(__dirname, '/public')));
 
+//true facts
 app.use(session({ secret: 'this is not a secret ;)',
   cookie:{},
   resave: false,
@@ -59,7 +61,8 @@ app.get('/logout', index.logout);
 app.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/' }), index.spotifyCallback);
 
 
-app.get('/auth/spotify', 
+app.get('/auth/spotify',
+  // Why are you asking for birthdate?
   passport.authenticate('spotify', {scope: ['user-read-email','user-read-birthdate', 'user-read-private', 'playlist-modify-public', 'playlist-modify-private'], showDialog: true}),
   function(req, res){
 });
