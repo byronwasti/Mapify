@@ -35,6 +35,7 @@ module.exports = function(){
                 method: 'POST',
                 uri: 'https://api.spotify.com/v1/users/'+id+'/playlists',
                 body: {
+                    //I might have come up with better names, maybe the starting and ending city names?
                     name: 'Mapify'+Math.floor(Math.random()*10+1)
                 },
                 headers: {
@@ -60,8 +61,9 @@ module.exports = function(){
                     }
                 } else {
                     var songsOptions = [songs];
-                } 
+                }
 
+                // I prefer a more descriptive name than elem, like song, but that's just me
                 songsOptions = songsOptions.map(function(elem){
                     return {
                         method: 'POST',
@@ -77,6 +79,7 @@ module.exports = function(){
                     }
                 });
 
+                // Why async map instead of return Promise.all(songOptions.map(options =>rp(options) )).then(res => res.json({err: false}))?
                 async.map( songsOptions, request, function(err, results){
                     if( err ){
                         console.error(err);
@@ -87,6 +90,7 @@ module.exports = function(){
                 });
             })
             .catch(function(err){
+                //probably should send error back up with res.status()
                 console.error(err);
                 console.error(err.error.error);
                 console.error("There was an error :(");
@@ -95,7 +99,7 @@ module.exports = function(){
 
         thirtySecondSample: function(req, res){
             // Get track sample from Spotify
-            
+
             var id = req.query.id.split(':')[2];
             rp({
                 method: 'GET',
@@ -106,7 +110,9 @@ module.exports = function(){
                 res.json(result);
             })
             .catch(function(err){
+                //say that three times fast :P
                 console.error(err.error.error);
+                //res.status(500).json(err)
                 res.json(err);
             });
         }

@@ -6,7 +6,7 @@ var filterByTime = function(req, songs){
     var total_time = 0;
     var output = [];
     var tripDur = Number(req.user.tripDuration.duration)*2;
-    
+
     while( total_time < tripDur ){
         if( songs.length < 1 ){
             return output;
@@ -18,7 +18,7 @@ var filterByTime = function(req, songs){
         var song = songs[random];
         songs.splice(random, 1);
 
-        //TODO:  Take a better look at this -- this is jank
+        //TODO:  Take a better look at this -- this is jank -- Agreed, might want to use == null (that catches both null and undefined) but that isn't a ton better
         if( song == undefined ){
             console.log("Bad song : " + song);
             continue;

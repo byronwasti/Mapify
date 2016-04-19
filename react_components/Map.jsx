@@ -10,6 +10,7 @@ var directionsDisplay,
 
 var Map = React.createClass({
 
+    //something is weird with your tabs and spaces here
 	componentWillMount: function(){
 		this.customStyle = customStyle;
 	},

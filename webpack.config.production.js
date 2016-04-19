@@ -21,8 +21,8 @@ module.exports = {
             }
         },
         {
-            test: require.resolve("react"), 
-            loader: "expose?React" 
+            test: require.resolve("react"),
+            loader: "expose?React"
         },
         {
             test:   [/\.css$/, /\.scss$/],
